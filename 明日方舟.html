@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>明日方舟风格网站</title>
+
+  <link rel="stylesheet" href="/swiper/swiper-bundle.css">
+  <style>
+    /* 通用样式 */
+    /* 字体声明 */
+    @font-face {
+      font-family: 'icomoon';
+      src: url('fonts/icomoon.eot?3urpom');
+      src: url('fonts/icomoon.eot?3urpom#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?3urpom') format('truetype'),
+        url('fonts/icomoon.woff?3urpom') format('woff'),
+        url('fonts/icomoon.svg?3urpom#icomoon') format('svg');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .background-video {
+      position: fixed;
+      top: -20px;
+      width: 100vw;
+      /* 使视频宽度等于视口宽度 */
+      height: 100vh;
+      /* 使视频高度等于视口高度 */
+      object-fit: cover;
+      /* 让视频保持比例同时覆盖整个视口 */
+      z-index: -1;
+      /* 将视频放在所有内容的后面 */
+      transform: scale(1.35);
+      transition: opacity 0.5s ease-in-out;
+
+    }
+
+    .background-video.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Header 样式 */
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: rgba(27, 27, 27, 0.35);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    }
+
+    nav {
+      display: flex;
+      z-index: 999;
+    }
+
+    .nav .active {
+      color: rgb(25, 209, 255);
+    }
+
+    header .logo img {
+      padding-left: 15px;
+      height: 65px;
+    }
+
+    header nav ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    header nav .word {
+      gap: 100px;
+    }
+
+    header nav ul li a {
+      display: inline-block;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: transform 0.5s;
+    }
+
+    header nav .word .en {
+      letter-spacing: -1px;
+    }
+
+    header nav .wl {
+      margin-left: 50px;
+      gap: 40px;
+      font-family: 'icomoon';
+    }
+
+    header nav ul li a:hover,
+    header nav ul li a .active {
+      color: rgb(25, 209, 255);
+      transform: scale(1.25);
+    }
+
+    header nav .wl .hreat .redactive {
+      color: red;
+    }
+
+    .share-box {
+      position: fixed;
+      top: 100px;
+      right: 0;
+      width: 190px;
+      height: 250px;
+      background: linear-gradient(to bottom, #18D1FF, #0066CC);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      /* 确保位于页面上层 */
+    }
+
+    .share-box ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      /* 使内容换行 */
+      gap: 10px;
+      /* 图片间距 */
+    }
+
+    .share-box ul li {
+      width: 45%;
+      /* 每行两个图标 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .share-box ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      align-items: center;
+    }
+
+    .share-box ul li a img {
+      width: 40px;
+      /* 图标大小 */
+      height: 40px;
+      margin-bottom: 5px;
+      /* 图标与文字之间的距离 */
+      transition: transform 0.3s;
+    }
+
+    .share-box ul li a:hover img {
+      transform: scale(1.2);
+      /* 鼠标悬停时放大 */
+    }
+
+
+    .share-box .triangle {
+      position: absolute;
+      right: 137px;
+      top: -29px;
+      width: 0;
+      height: 0;
+      border: 15px solid transparent;
+      border-bottom-color: #18D1FF;
+    }
+
+    .share-box .TOOLBOX {
+      position: absolute;
+      top: 32px;
+      left: 35px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0px;
+    }
+
+    /* 设置侧边菜单的基本样式 */
+    .side-menu {
+      display: none;
+      width: 13vw;
+      /* 侧边栏的宽度 */
+      height: 100vh;
+      /* 高度为视口高度 */
+      position: fixed;
+      /* 固定位置 */
+      top: 0;
+      right: 0;
+      /* 定位到右边 */
+      background: linear-gradient(135deg, #7ab3da, #2a5298);
+      /* 渐变背景，蓝色系 */
+      color: white;
+      /* 文本颜色 */
+      padding-top: 20px;
+      /* 顶部内边距 */
+      flex-direction: column;
+      /* 垂直排列 */
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      /* 右侧阴影效果 */
+      z-index: 1000;
+      /* 确保侧边栏位于页面最前面 */
+    }
+
+    .welcome {
+      font-size: 10px;
+      /* 设置字体大小 */
+      font-weight: 700;
+      margin-top: 80px;
+      margin-left: 30px;
+      margin-bottom: 20px;
+      /* 底部留空间 */
+      white-space: nowrap;
+    }
+
+    .image-container {
+      width: 82%;
+      height: 180px;
+      /* 盒子的高度，可以根据需求调整 */
+      margin: 15px 15px 3px 15px;
+      /* 居中显示盒子，并给盒子上下添加间距 */
+      overflow: hidden;
+      /* 隐藏超出盒子范围的部分 */
+    }
+
+    .side-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 图片填充盒子，保持比例 */
+    }
+
+    .image-container2 {
+      width: 120px;
+      height: 17px;
+      margin: 0 auto;
+    }
+
+    .side-menu .user {
+      margin: 10px 0 5px 50px;
+      white-space: nowrap;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 200px;
+    }
+
+    .side-menu li {
+      display: block;
+      width: 120px;
+      height: 20px;
+      background-color: #000;
+      color: #ffffff;
+      margin-left: 40px;
+      margin-bottom: 10px;
+      padding: 2px 0 2px 20px;
+      overflow: hidden;
+      /* 防止溢出 */
+      transition: background-color 0.8s ease, color 0.4s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .side-menu a,
+    .side-menu div {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 20px;
+      display: block;
+      white-space: nowrap;
+      /* 防止换行 */
+    }
+
+    .side-menu span {
+      display: inline-block;
+      /* 确保 span 和 div 在同一行 */
+      vertical-align: middle;
+    }
+
+    .side-menu .icon {
+      font-family: 'icomoon';
+      display: inline-block;
+      margin-left: 45px;
+      /* 给 icon 留一些间距 */
+      vertical-align: middle;
+      /* 让 div 和 span 垂直居中 */
+    }
+
+    .side-menu li:hover {
+      background-color: #ffffff;
+      /* 鼠标悬停时背景变为白色 */
+    }
+
+    .side-menu li:hover a,
+    .side-menu li:hover div {
+      color: #000000;
+      /* 确保链接颜色也变为黑色 */
+    }
+
+    .side-menu-bottom {
+      margin-top: 50px;
+      width: 100%;
+      height: 190px;
+      background-color: rgba(77, 125, 181);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.8s ease, color 0.4s ease, transform 0.2s ease;
+    }
+
+    .side-menu-bottom div {
+      font-family: 'icomoon';
+      font-size: 120px;
+      line-height: 170px;
+      font-weight: lighter;
+      text-align: center;
+    }
+
+    .side-menu-bottom:hover {
+      background-color: #ffffffd5
+    }
+
+    .side-menu-bottom div:hover {
+      color: #000;
+    }
+
+    /* 页面切换动画 */
+    .page {
+      display: none;
+      /* 初始状态为隐藏 */
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      /* 平滑过渡 */
+    }
+
+    .page.active {
+      display: block;
+      /* 显示状态 */
+      opacity: 1;
+
+    }
+
+    /* 主体部分 */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 80px;
+      /* 确保导航栏不会覆盖内容 */
+      text-align: center;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+
+    .background {
+      display: flex;
+      /* 使用 Flexbox */
+      align-items: flex-end;
+      /* 垂直方向对齐到底部 */
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      opacity: .78;
+      width: 42vw;
+      /* 宽度为视口宽度的 45% */
+      height: 88.4vh;
+      /* 高度为视口高度的 52% */
+      background-image: url(/img/bg1.png);
+      background-repeat: no-repeat;
+      background-position: 100% 0;
+      background-size: auto 110%;
+    }
+
+    .background .WordArt {
+      font-family: Novecentosanswide-UltraBold;
+      font-size: 4vw;
+      /* 动态调整字体大小 */
+      margin-left: 70px;
+      margin-bottom: 60px;
+      font-weight: 900;
+      opacity: 1;
+      color: #ffffff;
+      /* 设置文字颜色 */
+      text-shadow: 2px 2px 0 #ffffff, -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff;
+      /* 模拟描边 */
+      line-height: 1.5;
+      /* 调整行高，防止文字间距过大 */
+      letter-spacing: 1px;
+    }
+
+    .background .island {
+      font-family: Novecentosanswide-UltraBold;
+      font-size: 0.85vw;
+      /* 动态调整字体大小 */
+      font-weight: 700;
+      text-align: left;
+      margin-left: 10px;
+      margin-bottom: 110px;
+    }
+
+    .sidebar {
+      display: flex;
+      position: fixed;
+      top: 109px;
+      right: 0;
+      width: 220px;
+      height: 100vh;
+      flex-direction: column;
+      /* 垂直排列子元素 */
+      background-color: rgba(82, 164, 240, 0.3);
+      z-index: 999;
+    }
+
+    .sidebar .menu {
+      display: block;
+      margin-top: 370px;
+      width: 100%;
+      flex-grow: 0.2;
+      /* 使菜单部分占据剩余空间 */
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+      /* 去除默认的列表样式 */
+    }
+
+    .sidebar ul li {
+      display: flex;
+      width: 155px;
+      height: 40px;
+      margin: 0 20px 10px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 500;
+      align-items: center;
+      /* 垂直居中内容 */
+    }
+
+    .sidebar ul li:hover {
+      outline: 1.5px solid #fff;
+      /* 鼠标悬停时显示白色外边框 */
+    }
+
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      width: 100%;
+    }
+
+    .sidebar ul li .icon {
+      margin-right: 15px;
+      /* 图片与文本之间的间距 */
+    }
+
+    .sidebar ul li .icon img {
+      margin: 5px 0px 3px 10px;
+      width: 23px;
+      /* 设置图片大小 */
+      height: 25px;
+    }
+
+    .sidebar ul li div {
+      display: block;
+    }
+
+    .sidebar ul li .text {
+      display: flex;
+      flex-direction: column;
+      /* 垂直排列文本内容 */
+      align-items: flex-start;
+      /* 左对齐 */
+    }
+
+    /* 定义不同菜单项的背景色 */
+    .sidebar ul li:nth-child(2) {
+      background-color: black;
+    }
+
+    .sidebar ul li:nth-child(3) {
+      background-color: rgb(143, 195, 31);
+    }
+
+    .sidebar ul li:nth-child(4) {
+      background-color: rgb(0, 155, 170);
+    }
+
+    .sidebar ul li:nth-child(5) {
+      background-color: rgb(41, 41, 41);
+    }
+
+    .sidebar ul li:nth-child(6) {
+      background-color: rgb(41, 41, 41);
+    }
+
+    /* .smxz 样式 */
+    .sidebar .icon .smxz {
+      display: flex;
+      /* 水平排列 text-container 和 img */
+      margin-left: 10px;
+      /* 水平居中对齐 */
+      align-items: center;
+      /* 垂直居中对齐 */
+    }
+
+    .sidebar .icon .smxz .text-container {
+      display: flex;
+      /* 使用 flex 布局 */
+      flex-direction: column;
+      /* 使 span 垂直排列 */
+      align-items: center;
+      /* 水平居中对齐 */
+      margin-right: 5px;
+      /* 给文本和图片之间添加间距 */
+    }
+
+    .sidebar .icon .smxz span {
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .sidebar .icon .smxz img {
+      width: 60px;
+    }
+
+    .sidebar .icon .smxz .sixteen {
+      margin-left: 33px;
+      width: 55px;
+      height: 65px;
+    }
+
+    .board {
+      position: absolute;
+      width: 50vh;
+      height: 68vh;
+      left: 0;
+      top: 110px;
+      color: #fff;
+      /* 最大宽度，避免过大 */
+      background: linear-gradient(to right, rgba(233, 44, 53, 0.1), rgba(116, 18, 18, 0.3), rgba(0, 0, 0, 0.9));
+
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 6;
+    }
+
+    /* Swiper 容器的样式 */
+    .swiper {
+      display: flex;
+      align-content: center;
+      position: absolute;
+      width: 125vh;
+      height: 70vh;
+      left: 46%;
+      /* 初始居中 */
+      transform: translateX(-41%) translateY(-12%);
+      z-index: 5;
+    }
+
+
+
+    /* Swiper 滑块的样式 */
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      color: #000000;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 图片样式 */
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 滚动条拖动块样式 */
+    .swiper-scrollbar-drag {
+      background: var(--swiper-scrollbar-drag-bg-color, rgb(24, 209, 255));
+    }
+
+    .board-bnt {
+      display: flex;
+      /* 激活 Flexbox 布局 */
+      margin: 30px 50px 0 20px;
+      justify-content: space-between;
+      /* 子元素水平分布（两端对齐） */
+      align-items: center;
+      /* 垂直方向居中对齐 */
+      gap: 5px;
+      /* 子元素间距 */
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      /* 禁止换行 */
+    }
+
+    .board-bnt div:hover {
+      color: rgb(25, 209, 255);
+      /* 悬停时改变背景色 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      /* 悬停时添加阴影 */
+    }
+
+    .board-bnt div {
+      flex: 1;
+      /* 子元素均分空间（可选，根据需求调整） */
+      text-align: center;
+      /* 让文字居中（可选） */
+      padding: 2px;
+      /* 默认背景色 */
+      color: #ffffff;
+      /* 默认字体颜色 */
+      cursor: pointer;
+      /* 鼠标悬停变为手型 */
+      transition: background-color 0.3s, color 0.3s;
+      /* 平滑过渡效果 */
+    }
+
+    .board-bnt div.selected {
+      background-color: rgb(24, 209, 255);
+      /* 点击后背景变蓝 */
+      color: black;
+      /* 点击后字体变黑 */
+    }
+
+    .board-announcements {
+      margin: 30px 80px 0 50px;
+      /* 外边距，调整布局 */
+      display: flex;
+      /* 使用 Flexbox 布局 */
+      flex-direction: column;
+      /* 垂直排列公告 */
+      gap: 5px;
+      /* 每个公告之间的间距 */
+    }
+
+    .announcement {
+      display: flex;
+      /* 子元素水平排列 */
+      align-items: center;
+      /* 垂直方向居中 */
+      border-bottom: 1px solid rgb(86, 86, 86);
+      /* 添加边框 */
+      padding: 5px 20px 20px 0;
+      /* 内边距 */
+
+    }
+
+    .announcement-title {
+      font-weight: bold;
+      /* 加粗标题 */
+      color: rgb(24, 209, 255);
+      /* 标题颜色 */
+      margin-right: 20px;
+      /* 标题与内容间距 */
+      white-space: nowrap;
+      /* 禁止换行 */
+    }
+
+    .announcement-content {
+      display: flex;
+      flex-direction: column;
+      /* 子元素垂直排列 */
+      align-items: flex-start;
+      /* 子元素全部左对齐 */
+      gap: 5px;
+      /* 时间与内容之间的间距 */
+      color: #666;
+      /* 内容的默认颜色 */
+      word-wrap: break-word;
+      /* 在必要时换行 */
+      word-break: break-word;
+      /* 强制长单词或URL换行 */
+      overflow: hidden;
+      /* 隐藏超出部分 */
+      text-overflow: ellipsis;
+      /* 超出部分显示省略号 */
+      max-height: 100px;
+      /* 控制容器的最大高度 */
+      overflow: hidden;
+      /* 超出部分隐藏 */
+    }
+
+    .announcement-time {
+      font-family: Bender-Regular;
+      font-size: 14px;
+      /* 时间字体大小 */
+      color: #999;
+      /* 时间颜色 */
+      letter-spacing: 1px;
+      white-space: nowrap;
+      /* 禁止换行 */
+    }
+
+    .announcement-text {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: rgb(210, 210, 210);
+      text-align: left;
+      overflow: hidden;
+      /* 隐藏超出部分 */
+      text-overflow: ellipsis;
+      /* 超出部分显示省略号 */
+      max-width: 100%;
+      /* 控制最大宽度 */
+
+    }
+
+    .sidebar1 {
+      display: flex;
+      position: fixed;
+      top: 109px;
+      right: 0;
+      width: 23vh;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      /* 文字垂直居中 */
+      background: linear-gradient(to bottom, #333333, #000000);
+      overflow: hidden;
+      z-index: 2;
+      color: #ffffff;
+      /* 文字颜色 */
+      font-family: 'Arial', sans-serif;
+      /* 设置默认字体 */
+    }
+
+
+    .sidebar-text {
+      text-align: center;
+      transform: translateY(-200px);
+    }
+
+    .big-number {
+      font-size: 48px;
+      /* 大数字字体大小 */
+      font-weight: bold;
+      /* 加粗 */
+      letter-spacing: 2px;
+      /* 字符间距 */
+      color: #00bcd4;
+      /* 大数字颜色，使用亮色对比背景 */
+      left: -30px;
+    }
+
+    .separator {
+      font-size: 22px;
+      /* 分隔符字体大小 */
+      font-weight: 300;
+      color: #ffffff;
+    }
+
+    .small-text {
+      font-size: 18px;
+      /* 小数字字体大小 */
+      font-weight: 300;
+      color: #ffffff;
+      /* 小数字颜色 */
+    }
+
+    .info-text {
+      font-size: 18px;
+      /* 信息文字大小 */
+      font-weight: 600;
+      /* 半粗体 */
+      color: #ffffff;
+      letter-spacing: 2px;
+      /* 字符间距 */
+      /* 与上方数字留出距离 */
+      text-transform: uppercase;
+      /* 全部大写 */
+    }
+
+    /* 气泡容器 */
+    .bubbles-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 170px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .bubbles-bottom span {
+      position: absolute;
+      /* 定位到父容器的左上角 */
+      top: -23px;
+      /* 上边距为 0 */
+      left: 120px;
+      /* 左边距为 0 */
+      font-size: 66px;
+      font-family: Oswald-Medium;
+      /* 增大字体 */
+      font-weight: bold;
+      /* 加粗字体 */
+      color: rbg(36, 36, 36);
+      /* 字体颜色 */
+      opacity: 0.3;
+      /* 降低清晰度 */
+      text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+      /* 模糊效果 */
+      letter-spacing: -.05em;
+      transform: scaleY(1.3);
+      /* 垂直方向放大 */
+    }
+
+    .bubble-bottom {
+      position: absolute;
+      bottom: -30px;
+      background-color: rgba(214, 236, 241, 0.6);
+      /* 半透明气泡 */
+      border-radius: 50%;
+      animation: float-bottom linear infinite;
+    }
+
+    @keyframes float-bottom {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .OPcontainer {
+      display: flex;
+      width: 90%;
+      width: 150vh;
+      height: 84vh;
+      background-color: #f0e3e3;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: absolute;
+      /* 使容器可以使用left等定位属性 */
+      top: 120px;
+      left: 20px;
+      /* 确保它从父容器的左边开始 */
+      z-index: 6;
+    }
+
+
+    /* 左侧角色介绍 */
+    #operator .description {
+      flex: 3;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: background-image 0.6s ease;
+      background-size: cover;
+      /* 背景图片会覆盖整个区域 */
+      background-position: center;
+      /* 图片居中 */
+      color: #ffffff;
+      position: relative;
+      background-position: calc(50% + 40px) center;
+      /* 水平偏移 50px，垂直居中 */
+      overflow: hidden;
+    }
+
+    .description.fade-out {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.4s ease, transform 0.6s ease;
+    }
+
+    .description.fade-in {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.4s ease, transform 0.6s ease;
+    }
+
+    #operator .description h2 {
+      font-size: 2rem;
+
+      margin-bottom: 20px;
+      z-index: 1;
+      font-weight: bold;
+      /* 文字层级高于背景 */
+      color: #09c6f5;
+      text-align: left;
+      text-indent: 1em;
+    }
+
+    #operator .description p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: bold;
+      z-index: 1;
+      /* 文字层级高于背景 */
+      max-width: 350px;
+      padding-bottom: 250px;
+      letter-spacing: 1px;
+      text-align: left;
+      text-indent: 2em;
+    }
+
+    /* 背景遮罩层，防止文字不清晰 */
+    .description::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(65, 72, 78, 0.35);
+      /* 半透明黑色覆盖层 */
+      z-index: 0;
+      /* 确保遮罩层在背景下 */
+    }
+
+    #operator .description * {
+      position: relative;
+    }
+
+    .carousel {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(220, 220, 220, 1) 15%, rgba(120, 120, 160, 0.8) 40%, rgb(50, 50, 80) 80%);
+    }
+
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      /* 给按钮周围一些内边距 */
+      pointer-events: none;
+    }
+
+    .carousel-buttons button {
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+      /* 渐变背景 */
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      /* 调整按钮大小 */
+      height: 40px;
+      pointer-events: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      /* 调整字体大小 */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .carousel-buttons button:hover {
+      transform: scale(1.1);
+      /* 悬停时放大 */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      /* 放大阴影效果 */
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+      /* 悬停时改变背景 */
+    }
+
+    .carousel-buttons button:active {
+      transform: scale(0.95);
+      /* 按下时缩小 */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      /* 按下时恢复阴影 */
+    }
+
+    /* 整体容器 - 使用 perspective 和其他 3D 效果 */
+    #more {
+      perspective: 1800px;
+      /* 设定整体透视 */
+      user-select: none;
+    }
+
+    /* 卡片容器 - 基于视口调整大小 */
+    .cardContainer {
+      position: relative;
+      display: flex;
+      top: 8vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #000000;
+      border-radius: 15px;
+      padding: 3vw 3.5vw;
+      /* 自适应内边距 */
+      perspective: 1800px;
+      /* 影响子元素 */
+      text-align: left;
+      transform-origin: 50% 50%;
+      transform-style: preserve-3d;
+      transform: rotateX(6deg) rotateY(12deg);
+      /* 增加旋转效果 */
+      width: 90vw;
+      height: 30vh;
+      z-index: 2;
+    }
+
+    /* 卡片集，子元素间隔 */
+    .cards {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3vw;
+      /* 自适应间距 */
+    }
+
+    /* 单张卡片 */
+    .card {
+      position: relative;
+      width: 20vw;
+      height: 88vh;
+      aspect-ratio: 7/10;
+      border-radius: 15px;
+      box-shadow: 0px 15px 30px 25px rgba(0, 0, 0, 0.17), 0px 0px 15px 5px rgba(255, 255, 255, 0.6);
+      /* 增加阴影，模拟深度 */
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transform: translatez(35px);
+      /* 增加深度感 */
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+      /* 动画过渡效果 */
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* 卡片前景图像 */
+    .card:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(34, 32, 32, 0.35);
+      /* 半透明黑色遮罩 */
+      z-index: 1;
+      transition: background 0.3s ease-out;
+    }
+
+    /* 背景图 */
+    .card__bg {
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      bottom: -50px;
+      right: -50px;
+      transform-origin: 50% 50%;
+      transform: translateZ(-50px);
+      /* 使背景图远离卡片，增强透视感 */
+      z-index: 0;
+    }
+
+    /* 卡片背景示例 */
+    .card__one .card__bg {
+      background: url("./images/3dr_monobg.jpg") center/cover no-repeat;
+    }
+
+    .card__two .card__bg {
+      background: url("./images/3dr_spirited.jpg") center/cover no-repeat;
+    }
+
+    .card__three .card__bg {
+      background: url("./images/3dr_howlbg.jpg") center/cover no-repeat;
+    }
+
+    /* 卡片图片调整 */
+    .card__img {
+      position: relative;
+      height: 100%;
+      filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.8));
+      /* 添加阴影效果 */
+      transition: transform 0.2s ease-in-out;
+      /* 平滑过渡 */
+    }
+
+    .card__one .card__img {
+      width: 110%;
+      height: 110%;
+    }
+
+    .card__two .card__img {
+      width: 110%;
+    }
+
+    .card__three .card__img {
+      width: 110%;
+      height: 110%;
+    }
+
+    .card:hover {
+      box-shadow: none;
+    }
+
+    .card:hover:before {
+      background: transparent;
+      /* 移除遮罩层 */
+    }
+
+    /* 卡片文字区域 */
+    .card__text {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 15vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      /* 使内容水平排列 */
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+      z-index: 2;
+    }
+
+    .card__title {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      /* 使文字和图片垂直居中 */
+      padding: 0 10px;
+      margin-right: 10px;
+      /* 添加间距以隔开图片和文字 */
+    }
+
+    .card__title img {
+      height: 40px;
+      /* 使图片与文字的高度相同 */
+      margin-right: 15px;
+      /* 图片与文字之间的间距 */
+    }
+
+
+
+    /* 固定位置的 3D 信息 */
+    .more-text {
+      position: fixed;
+      bottom: -37vh;
+      right: 1vw;
+      z-index: 1;
+      font-size: clamp(1rem, 2vw, 2rem);
+      /* 响应式字体 */
+      color: #fff;
+      transition: bottom 0.3s ease-out;
+    }
+
+    .overlay {
+      display: flex;
+      position: absolute;
+      top: -194px;
+      left: -25px;
+      width: 100vw;
+      height: 100vh;
+      background: url(/img/overlay1.png);
+      background-size: cover;
+      /* 背景图适应屏幕 */
+      background-position: center;
+      /* 居中背景 */
+      z-index: 1000;
+      color: white;
+      overflow: hidden;
+      /* 防止伪元素溢出 */
+    }
+
+    /* 为背景添加阴影的伪元素 */
+    /* 遮罩层的伪元素，用于实现四周阴影 */
+    .overlay::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle, rgba(0, 0, 0, 0.2) 1%, transparent 120%);
+      /* 创建四周的阴影效果 */
+      z-index: -1;
+      /* 确保伪元素在背景下 */
+    }
+
+    .overlay-content {
+      position: relative;
+      text-align: left;
+      /* 保持文字靠左 */
+      font-weight: bold;
+      /* 加粗文字 */
+      color: white;
+      /* 设置文字颜色为白色 */
+      display: flex;
+      /* 使用 flexbox 来布局 */
+      flex-direction: column;
+      /* 纵向排列 */
+      justify-content: center;
+      /* 垂直居中 */
+      align-items: center;
+      /* 水平居中 */
+      height: 100%;
+      /* 确保高度撑满 */
+    }
+
+    .content-box {
+      display: flex;
+      /* 使用 flexbox 来布局 */
+      flex-direction: column;
+      /* 纵向排列两个 div */
+      justify-content: center;
+      /* 垂直居中两个 div */
+      align-items: flex-start;
+      /* 水平居中两个 div */
+      margin-bottom: 20px;
+      /* 添加底部间距 */
+    }
+
+
+    .content-box div {
+      font-size: 3rem;
+      /* 设置文字的大小 */
+      margin-left: 10vw;
+
+      /* 添加底部间距 */
+      text-align: left;
+      /* 让文字在 div 内部居中 */
+    }
+
+    /* 返回按钮样式 */
+    /* 盒子样式 */
+    .button-container {
+      display: flex;
+      /* 水平排列按钮 */
+      gap: 10px;
+      /* 按钮之间的间距 */
+      position: absolute;
+      /* 固定定位 */
+      bottom: 10vh;
+      /* 底部 20px */
+      left: 1vw;
+      /* 左侧 20px */
+      z-index: 1001;
+      /* 确保按钮在遮罩层之上 */
+    }
+
+    /* 按钮样式 */
+    .overlay button {
+      align-items: center;
+      border: 0;
+      box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+      box-sizing: border-box;
+      color: #ffffff;
+      display: flex;
+      font-size: 18px;
+      justify-content: center;
+      line-height: 1em;
+      width: 15vw;
+      height: 7vh;
+      padding: 3px;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .overlay button:nth-child(1) {
+      background-image: linear-gradient(144deg, #b0b0b0, #808080 50%, #dcdcdc);
+    }
+
+    .overlay button:nth-child(2) {
+      background-image: linear-gradient(144deg, #431ee9, #3e32c1 50%, #0095b3);
+    }
+
+    .overlay button:active,
+    .overlay button:hover {
+      outline: 0;
+    }
+
+    .overlay button span {
+      background-color: rgb(117, 115, 133);
+      padding: 16px 24px;
+      width: 80%;
+      height: 46%;
+      color: #ffffff;
+      font-weight: bold;
+      text-align: center;
+      line-height: 3vh;
+      transition: 300ms;
+    }
+
+    .overlay button:hover span {
+      background: none;
+    }
+
+    .overlay button .return:hover {
+      color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <video class="background-video" src="img/pv4.mp4" autoplay muted loop></video>
+
+  <!-- Header Section (导航栏) -->
+  <header>
+    <div class="logo" style="z-index: 999;">
+      <a href=""><img src="/img/Logo_明日方舟.svg" alt="明日方舟 Logo"></a>
+    </div>
+    <nav class="nav">
+      <ul class="word nav1">
+        <li><a href="#index" class="active">
+            <div class="en">INDEX</div>
+            <div class="cn" style="font-size: 12px;">首页</div>
+          </a></li>
+        <li><a href="#information">
+            <div class="en">INFORMATION</div>
+            <div class="cn" style="font-size: 12px;">情报</div>
+          </a></li>
+        <li><a href="#operator">
+            <div class="en">OPERATOR</div>
+            <div class="cn" style="font-size: 12px;">干员</div>
+          </a></li>
+        <li><a href="#more">
+            <div class="en">MORE</div>
+            <div class="cn" style="font-size: 12px;">更多内容</div>
+          </a></li>
+      </ul>
+      <ul class="wl nav2">
+        <li><a href="#" class="share" data-id="sshare">
+            <div></div>
+          </a></li>
+        <li><a href="#" class="hreat" data-name="new">
+            <div></div>
+          </a></li>
+        <li><a href="#" data-id="login">
+            <div></div>
+          </a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="share-box" style="display: none;">
+    <span class="triangle"></span>
+    <span class="TOOLBOX">TOOLBOX &nbsp;&nbsp;-------------------</span>
+    <ul>
+      <li>
+        <a href="https://www.skland.com/game/arknights" target="_blank"><img src="/img/senn.png" alt="森空岛"></a>
+      </li>
+      <li><a href="https://www.bilibili.com/blackboard/era/ObGdxFoF24apXxne.html?bsource=activity_jmzm_arknights_ggt"
+          target="_blank"><img src="/img/bilibili.png" alt="bilibili"></a></li>
+      <li><a href="https://ti.qq.com/qqlevel/index" target="_blank"><img src="/img/qq.bb.png" alt="QQ"></a></li>
+      <li><a href="https://wx.qq.com/" target="_blank"><img src="/img/vx4.png" alt="微信"></a></li>
+      <li><a href="https://www.weibo.com/arknights" target="_blank"><img src="/img/wb1.png" alt="微博"></a></li>
+    </ul>
+  </div>
+  <div class="side-menu">
+    <div class="welcome">
+      WELCOME &nbsp;&nbsp;———————
+    </div>
+    <div class="image-container">
+      <img src="/img/登录1.png" alt="Your Image" class="side-image">
+    </div>
+    <div class="image-container2">
+      <img src="/img/RHO.png" alt="Your Image" class="side-image">
+    </div>
+    <div class="user">
+      <div>Please login.</div>
+      <div>请先登录您的账号。</div>
+    </div>
+    <ul>
+      <li>
+        <a href="https://customer-service.hypergryph.com/ak" target="_blank"><span>客服中心</span>
+          <div class="icon"></div>
+        </a>
+      </li>
+      <li>
+        <div class="login_btn">
+          <span>立即登录</span>
+          <div class="icon"></div>
+        </div>
+      </li>
+      <li>
+        <div class="login_btn">
+          <span>前往注册</span>
+          <div class="icon"></div>
+        </div>
+      </li>
+    </ul>
+    <div class="side-menu-bottom">
+      <div></div>
+    </div>
+  </div>
+  <!-- 主体部分 -->
+  <main>
+    <!-- 可以在这里添加更多内容 -->
+    <section id="index" class="page">
+      <div class="background">
+        <div class="WordArt">ARKNIGHTS</div>
+        <ul class="island">
+          <li>
+            RHODES ISLAND
+          </li>
+          <li style="font-size: 0.7vw;font-weight: 500">
+            HTTPS://AK.HYPERGRYPH.COM
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar">
+        <ul class="menu">
+          <div class="sidebar-text">
+            <span class="big-number">00</span>
+            <span class="separator">//</span>
+            <span class="small-text">00</span>
+            <span class="separator">/</span>
+            <span class="small-text">03</span>
+            <div class="info-text">INDEX</div>
+          </div>
+          <li><a href="https://itunes.apple.com/cn/app/id1454663939?mt=8" target="_blank">
+              <div class="icon"><img src="/img/apple.jpg" alt="App Icon" /></div>
+              <div class="text">
+                <div>App Store</div>
+                <div class="download">下载</div>
+              </div>
+            </a></li>
+          <li><a href="https://ak.hypergryph.com/downloads/android_lastest" target="_blank">
+              <div class="icon"><img src="/img/安装1.png" alt="News Icon" /></div>
+              <div class="text">
+                <div>Android</div>
+                <div class="download">下载</div>
+              </div>
+            </a></li>
+          <li><a href="https://d.taptap.com/latest/auto_iem_exch-resource_mqhmbgxq_32294_id70253" target="_blank">
+              <div class="icon"><img src="/img/taptap.jpg" alt="Game Icon" /></div>
+              <div class="text">通过TapTap下载</div>
+            </a></li>
+          <li><a href="https://www.skland.com/game/arknights" target="_blank">
+              <div class="icon"><img src="/img/森空岛2.png" alt="Store Icon" /></div>
+              <div class="text">官方社区</div>
+            </a></li>
+          <li><a href="https://user.hypergryph.com/payment/arknights?source_from=ak_official" target="_blank">
+              <div class="icon"><img src="/img/氪金.png" alt="Settings Icon" /></div>
+              <div class="text">官方充值中心</div>
+            </a></li>
+        </ul>
+        <div class="icon">
+          <div class="smxz">
+            <div class="text-container">
+              <span>扫</span>
+              <span>码</span>
+              <span>下</span>
+              <span>载</span>
+            </div>
+            <img src="/img/二维码.png" alt="">
+            <img src="/img/16+.png" alt="" class="sixteen">
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section id="information" class="page">
+      <div class="board">
+        <div class="board-bnt">
+          <div data-category="最新"><span>最新</span></div>
+          <div data-category="公告"><span>公告</span></div>
+          <div data-category="活动"><span>活动</span></div>
+          <div data-category="新闻"><span>新闻</span></div>
+        </div>
+        <div class="board-announcements" data-category="最新">
+          <div class="announcement">
+            <span class="announcement-title">活动：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 21</span>
+              <span class="announcement-text">[活动预告] 「荒原残火·塔露拉」新干员卡池活动即将开启</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">公告：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 20</span>
+              <span class="announcement-text">[明日方舟] 11月20日封禁 集成战略 [维什戴尔]玩家处理公示</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">公告：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 15</span>
+              <span class="announcement-text">[明日方舟] 11月15日16:00闪断更新,补偿520000合成玉公告</span>
+            </div>
+          </div>
+        </div>
+        <div class="board-announcements" data-category="公告">
+          <div class="announcement">
+            <span class="announcement-title">公告：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 20</span>
+              <span class="announcement-text">[明日方舟] 11月20日封禁 集成战略 [维什戴尔]玩家处理公示</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">公告：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 15</span>
+              <span class="announcement-text">[明日方舟 11月15日16:00闪断更新,补偿520000合成玉公告</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">公告：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 13</span>
+              <span class="announcement-text">[明日方舟] 12月7日 明日方舟停服决定 感谢陪伴 感恩有你</span>
+            </div>
+          </div>
+        </div>
+        <div class="board-announcements" data-category="活动">
+          <div class="announcement">
+            <span class="announcement-title">活动：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 21</span>
+              <span class="announcement-text">[活动预告] 「荒原残火·塔露拉」新干员卡池即将开启</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">活动：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 11 / 01</span>
+              <span class="announcement-text">[揭幕者们] 罗德岛&企鹅物流 厨艺烹饪交流大赛</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">活动：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2024 // 10 / 25</span>
+              <span class="announcement-text">[活动预告] 2024感谢庆典即将开启</span>
+            </div>
+          </div>
+        </div>
+        <div class="board-announcements" data-category="新闻">
+          <div class="announcement">
+            <span class="announcement-title">新闻：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2022 // 1 / 17</span>
+              <span class="announcement-text">[美食探索] 是什么珍馐能让见多识广的他大喊“我吃两碗”？？！</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">新闻：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2020 // 10 / 25</span>
+              <span class="announcement-text">[红酒报] 烛骑士私生活奢靡腐败？红酒浴池？上百帅气男仆？揭露松露林城堡的真面目！</span>
+            </div>
+          </div>
+          <div class="announcement">
+            <span class="announcement-title">新闻：</span>
+            <div class="announcement-content">
+              <span class="announcement-time">2020 // 10 / 23</span>
+              <span class="announcement-text">[家有往事] 深夜进出酒吧，关系密切？！临光姐妹与佐菲娅的“家族秘事”！</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="/img/swiper1.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="/img/swiper2.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="/img/swiper3.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="/img/swiper4.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="/img/swiper5.jpg" alt=""></div>
+        </div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+      <div class="sidebar1">
+        <div class="sidebar-text">
+          <span class="big-number">01</span>
+          <span class="separator">//</span>
+          <span class="small-text">01</span>
+          <span class="separator">/</span>
+          <span class="small-text">03</span>
+          <div class="info-text">INFORMATION</div>
+        </div>
+      </div>
+      <div class="bubbles-bottom">
+        <span>BREAKING NEWS</span>
+      </div>
+    </section>
+    <section id="operator" class="page">
+      <div class="OPcontainer">
+        <!-- 左侧角色介绍 -->
+        <div class="description" id="description-area">
+          <h2 id="character-name">Character 1</h2>
+          <p id="character-description">
+            This is the description of Character 1. A brave warrior with unmatched strength and courage.
+          </p>
+        </div>
+
+        <!-- 右侧轮播图 -->
+        <div class="carousel">
+          <div class="carousel-images">
+            <img src="img/阿米娅.png" alt="Character 1">
+            <img src="img/立绘_浊心斯卡蒂.png" alt="Character 2">
+            <img src="img/立绘_灰喉_1.png" alt="Character 3">
+            <img src="img/立绘_夕_1.png" alt="Character 4">
+            <img src="img/立绘_忍冬_1.png" alt="Character 5">
+          </div>
+          <div class="carousel-buttons">
+            <button id="prev">‹</button>
+            <button id="next">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar1" style="z-index: -1;">
+        <div class="sidebar-text">
+          <span class="big-number">02</span>
+          <span class="separator">//</span>
+          <span class="small-text">02</span>
+          <span class="separator">/</span>
+          <span class="small-text">03</span>
+          <div class="info-text">OPERATOR</div>
+        </div>
+      </div>
+    </section>
+    <section id="more" class="page" style="margin: 0;">
+      <div class="cardContainer">
+        <div class="cards">
+          <!-- Card 1 -->
+          <a href="javascript:void(0)" class="card card__one">
+            <div class="card__bg"></div>
+            <img class="card__img" src="./img/more1.jpg" />
+            <div class="card__text">
+              <p class="card__title">
+                <img src="./img/集成战略.png" alt="Icon" />
+                集成战略
+              </p>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="javascript:void(0)" class="card card__two">
+            <div class="card__bg"></div>
+            <img class="card__img" src="./img/more2.jpg" />
+            <div class="card__text">
+              <p class="card__title">
+                <img src="./img/生息演算.png" alt="Icon" />
+                生息演算
+              </p>
+            </div>
+          </a>
+
+          <!-- Other cards -->
+          <a href="https://ak.hypergryph.com/anime/" target="_blank" class="card card__three">
+            <div class="card__bg"></div>
+            <img class="card__img" src="./img/more3.jpg" />
+            <div class="card__text">
+              <p class="card__title">
+                <img src="./img/衍生.png" alt="Icon" /> 衍生动画
+              </p>
+            </div>
+          </a>
+          <a href="https://terra-historicus.hypergryph.com/" target="_blank" class="card card__four">
+            <div class="card__bg"></div>
+            <img class="card__img" src="./img/more4.jpg" />
+            <div class="card__text">
+              <p class="card__title">
+                <img src="./img/泰拉记事社.png" alt="Icon" /> 泰拉记事社
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="more-text">
+        <span class="big-number">03</span>
+        <span class="separator">//</span>
+        <span class="small-text">03</span>
+        <span class="separator">/</span>
+        <span class="small-text">03</span>
+        <div class="info-text" style="text-align: end;">MORE</div>
+      </div>
+
+      <!-- 覆盖层 -->
+      <div id="overlay" class="overlay" style="display: none;">
+        <div class="overlay-content">
+          <div class="content-box">
+            <div id="overlay-content"></div> <!-- 去掉了 title -->
+          </div>
+          <div class="button-container">
+            <button class="back-button" onclick="closeOverlay()">
+              <span class="return">返回</span>
+            </button>
+            <button id="navigate-button">
+              <span>活动主题网站</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </section>
+  </main>
+
+
+
+  <script src="/swiper/swiper-bundle.min.js"></script>
+</body>
+<script>
+
+  (function () {
+    // 处理 .word 中的点击事件
+    document.querySelector('.nav .word').addEventListener('click', function (e) {
+      // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
+      const nav = e.target.closest('a');
+      // 如果点击的是 a 标签（或其子元素），就执行下面的逻辑
+      if (nav) {
+        const old = document.querySelector('.nav1 .active');
+
+        // 如果有 active 类的元素，移除该类
+        if (old) {
+          old.classList.remove('active');
+        }
+        // 为当前点击的 a 标签添加 active 类
+        nav.classList.add('active');
+      }
+    });
+  })();
+
+  (function () {
+    // 处理 .wl 中的点击事件
+    document.querySelector('.nav .wl').addEventListener('click', function (e) {
+      // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
+      const nav = e.target.closest('a');
+
+      if (nav && nav.dataset.id !== 'login') {
+        // 阻止事件冒泡，避免影响 .word 部分
+        e.stopPropagation();
+
+        // 如果点击的是带有 "new" data-name 的链接，做特殊处理
+        if (nav.dataset.name === 'new') {
+          e.target.classList.toggle('redactive');
+        } else {
+          // 为当前点击的 a 标签添加 active 类
+          const old = document.querySelector('.nav2');
+
+          // 如果有 active 类的元素，移除该类
+          if (old) {
+            old.classList.toggle('active');
+          }
+
+          // 为当前点击的 a 标签添加 active 类
+          nav.classList.toggle('active');
+        }
+      }
+    });
+  })();
+
+  (function () {
+    const shareBox = document.querySelector('.share-box');
+    shareBox.style.display = 'none'; // 初始隐藏
+    document.querySelector('.share').addEventListener('click', function (e) {
+      shareBox.style.display = shareBox.style.display === 'none' ? 'block' : 'none';
+    });
+  })();
+
+  (function () {
+    const sideMenu = document.querySelector('.side-menu');
+    const loginButton = document.querySelector('[data-id="login"]');
+    const loginBtns = document.querySelectorAll('.side-menu-bottom');
+
+    // 点击 data-id="login" 时显示侧边栏
+    loginButton.addEventListener('click', function () {
+      sideMenu.style.display = 'flex'; // 显示侧边栏
+    });
+
+    // 点击 .login_btn 时隐藏侧边栏
+    loginBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        sideMenu.style.display = 'none'; // 隐藏侧边栏
+      });
+    });
+  })();
+  // Hash 路由实现
+  function handleHashChange() {
+    const video = document.querySelector('.background-video');
+    const hash = window.location.hash || '#index'; // 默认显示首页
+    const sections = document.querySelectorAll('.page');
+
+    // 切换每个页面
+    sections.forEach(section => {
+      if ('#' + section.id === hash) {
+        section.classList.add('active'); // 当前页面添加 active 类
+      } else {
+        section.classList.remove('active'); // 移除 active 类
+      }
+    });
+
+    document.querySelectorAll('.wl a').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // 阻止默认跳转行为
+        // 这里可以加入你的其他逻辑代码
+      });
+    });
+    // 更新导航栏的 active 状态
+    const links = document.querySelectorAll('.nav .hash');
+    links.forEach(link => {
+      if (link.getAttribute('href') === hash) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // 如果是首页显示视频，否则隐藏视频
+    if (hash === '#index') {
+      video.classList.remove('hidden');
+    } else {
+      video.classList.add('hidden');
+    }
+  }
+  function resetToIndex() {
+    if (window.location.hash !== '#index') {
+      window.location.hash = '#index'; // 设置为首页的哈希
+    }
+  }
+  window.addEventListener('hashchange', handleHashChange);
+  window.addEventListener('load', () => {
+    resetToIndex(); // 刷新页面回到首页
+    handleHashChange(); // 触发 hash 路由更新
+  });
+
+  var swiper = new Swiper(".mySwiper", {
+    autoplay: true,
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      hide: true,
+    },
+  });
+  (function () {
+    const boardItems = document.querySelectorAll('.board-bnt div');
+
+    // 为每个 div 添加点击事件
+    boardItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // 移除其他元素的 selected 类
+        boardItems.forEach(div => div.classList.remove('selected'));
+        // 为当前点击的元素添加 selected 类
+        item.classList.add('selected');
+      });
+    });
+
+  })();
+  (function () {
+    // 获取所有按钮
+    const buttons = document.querySelectorAll('.board-bnt div');
+    // 获取所有公告区域
+    const announcementSections = document.querySelectorAll('.board-announcements');
+
+    // 为每个按钮添加点击事件
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        // 获取当前按钮的分类
+        const category = button.getAttribute('data-category');
+
+        // 移除其他按钮的 `selected` 类，给当前按钮添加 `selected` 类
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+
+        // 显示对应分类的公告区域，隐藏其他公告区域
+        announcementSections.forEach(section => {
+          if (section.getAttribute('data-category') === category) {
+            section.style.display = 'flex'; // 显示匹配的区域
+          } else {
+            section.style.display = 'none'; // 隐藏其他区域
+          }
+        });
+      });
+    });
+
+    // 默认选中第一个按钮，并显示其对应内容
+    buttons[0].classList.add('selected');
+    announcementSections.forEach((section, index) => {
+      section.style.display = index === 0 ? 'flex' : 'none';
+    });
+
+  })();
+  (function () {
+    // 获取气泡容器
+    const bubblesContainer = document.querySelector('.bubbles-bottom');
+
+    // 设置气泡的数量（降低生成的气泡数量）
+    const bubbleCount = 25; // 每次生成 25 个气泡
+
+    // 随机生成气泡
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble-bottom');
+
+      // 随机设置气泡大小（在5px到10px之间）
+      const size = Math.random() * (10 - 3) + 3;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+
+      // 随机设置气泡出现的水平位置
+      const leftPosition = Math.random() * 100;  // 水平位置：0% 到 100%
+      bubble.style.left = `${leftPosition}%`;
+
+      // 随机设置气泡的上升速度（3秒到6秒之间）
+      const duration = Math.random() * (8 - 3) + 3;
+      bubble.style.animationDuration = `${duration}s`;
+
+      // 随机设置气泡的延迟时间（0到2秒之间）
+      const delay = Math.random() * 2;
+      bubble.style.animationDelay = `${delay}s`;
+
+      // 将气泡添加到容器中
+      bubblesContainer.appendChild(bubble);
+
+      // 在动画完成后移除气泡
+      bubble.addEventListener('animationend', () => {
+        bubble.remove();
+      });
+    }
+
+    // 每隔500毫秒生成一定数量的气泡
+    setInterval(createBubble, 800); // 每500毫秒生成25个气泡
+  })();
+
+  // 数据：角色名称、描述和本地背景图片路径
+  (function () {
+    const characterData = [
+      {
+        name: "阿米娅",
+        description: "罗德岛的公开领袖，在内部拥有最高执行权。虽然，从外表上看起来仅仅是个不成熟的少女，实际上，她却是深受大家信任的合格的领袖。现在，阿米娅正带领着罗德岛，为了感染者的未来，为了让这片大地挣脱矿石病的阴霾而不懈努力。很难想象她幼小稚嫩的肩上已经担上了怎么用艰巨重大的责任。",
+        background: "img/立绘_阿米娅_2.png",
+        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)8%, rgba(30,57,136, 0.6),rgba(104,36,43))"
+      },
+      {
+        name: "斯卡蒂",
+        description: "此刻的祂也是独身，孤独地拖着自己吞噬过的万物，在将死的宇宙中漂流到了时间的尽头。那么此刻，祂是否也该对自己身躯里那些无动于衷的养分歌唱？如果是斯卡蒂的话，她一定会歌唱。在她思考清楚那些复杂的问题之前，她的歌声就会先涌出来——因为歌声就是她的话语、她的想象、她的创造。",
+        background: "img/立绘_浊心斯卡蒂背景.png",
+        gradient: "linear-gradient(135deg, rgba(179,173,175, 1) 15%, rgba(120, 120, 160, 0.8) 60%, rgba(52,58,77) 80%)"
+      },
+      {
+        name: "灰喉",
+        description: "她在如火的夕阳下醒来。她记起来，她在甘糖城救下了很多人，很多很多人。她想起了自己的母亲，她忽感悲伤，却又笑了。她理解了父亲，可还没能找到她的母亲。她能找到吗？她会找到吗？想到这，她略感头痛，但出奇轻松。她转过头去，对着那个同样受伤不轻的大菲林大骂道：“煌！你就不能换个办法叫醒我吗？”",
+        background: "img/立绘_灰喉_skin1.png",
+        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)15%, rgba(73,175,175)40%,rgba(60,109,126) 60%)"
+      },
+      {
+        name: "夕",
+        description: "“有兽色青 形似重峦其数十一 戴月披烟云涛微茫 暮沉色见须靛似林 骨峭如石语曰 星藏点雪 月隐晦明人有清浊 色有佳劣五兵难伤 五火难防焚其血肉 墨泉流涌 雾穷烟尽 两首无羁然其兽难制 晨昏方易 顿尔消弭其形亦伪 其物亦伪笔缀卷阖 如醉似痴 一夕烬尽”......其薨，余皆俯首，由此开太平之先。",
+        background: "img/立绘_夕_skin1.png",
+        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)6%, rgba(27,84,134, 0.9),rgba(136,177,169)80%)"
+      },
+      {
+        name: "忍冬",
+        description: "忍冬确信，就像真的曾将这盒拼图完成过无数次一样。以那片孤零零的拼图为圆心，她似乎看见了一只追逐自己尾巴的狼，一圈又一圈，乐此不疲。她摇摇头，干脆弯起手指将那片拼图从桌上弹飞。“这不是休假时该想的事情。”她朝宿舍外走去。预约的理疗时间到了吗？不重要，假期中的杀手可以奢侈地使用她的时间。",
+        background: "img/立绘_忍冬_2.png",
+        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)5%, rgba(243,231,192, 0.9),rgba(85,86,126) 80%)"
+      }
+    ];
+
+    // 获取元素
+    const carouselImages = document.querySelector('.carousel-images');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const characterName = document.getElementById('character-name');
+    const characterDescription = document.getElementById('character-description');
+    const descriptionArea = document.getElementById('description-area');
+    const carousel = document.querySelector('.carousel'); // 轮播图容器
+    let currentIndex = 0;
+    let autoPlayInterval; // 用于保存自动播放的定时器
+
+    // 更新角色介绍
+    function updateCharacterInfo(index) {
+      const character = characterData[index];
+      characterName.textContent = character.name;
+      characterDescription.textContent = character.description;
+      descriptionArea.style.backgroundImage = `url(${character.background})`;
+      carousel.style.background = character.gradient; // 动态更新轮播图的渐变背景
+    }
+
+    // 切换动画
+    function animateDescription(index) {
+      descriptionArea.classList.remove("fade-in");
+      descriptionArea.classList.add("fade-out");
+
+      setTimeout(() => {
+        updateCharacterInfo(index); // 更新内容
+        descriptionArea.classList.remove("fade-out");
+        descriptionArea.classList.add("fade-in");
+      }, 0); // 动画时长与 CSS 一致
+    }
+
+    // 切换到指定索引
+    function showSlide(index) {
+      if (index < 0) {
+        currentIndex = characterData.length - 1; // 回到最后一张
+      } else if (index >= characterData.length) {
+        currentIndex = 0; // 回到第一张
+      } else {
+        currentIndex = index;
+      }
+      carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+      animateDescription(currentIndex);
+    }
+
+    // 按钮事件监听
+    prevButton.addEventListener("click", () => showSlide(currentIndex - 1));
+    nextButton.addEventListener("click", () => showSlide(currentIndex + 1));
+
+    // 自动播放功能：每隔3秒自动点击"下一张"按钮
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(() => {
+        nextButton.click(); // 模拟点击“下一张”按钮
+      }, 5000); // 每隔3秒自动点击
+    }
+
+    // 停止自动播放
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // 鼠标悬停时停止自动播放
+    carousel.addEventListener("mouseenter", stopAutoPlay);
+
+    // 鼠标移出时重新启动自动播放
+    carousel.addEventListener("mouseleave", startAutoPlay);
+
+    // 初始化第一个角色
+    updateCharacterInfo(0);
+
+    // 开始自动播放
+    startAutoPlay();
+  })();
+
+  (function () {
+    // 获取元素
+    const cards = document.querySelector(".cardContainer");
+    const cardItems = document.querySelectorAll(".card");
+    const images = document.querySelectorAll(".card__img");
+    const backgrounds = document.querySelectorAll(".card__bg");
+
+    const range = 40;
+    let timeout;
+    let isOverlayOpen = false; // 标志位：遮罩层是否打开
+
+    // 卡片数据数组，只包含 card__one 和 card__two
+    const cardData = [
+      {
+        backgroundImage: '/img/overlay1.png',
+        redirectUrl: 'https://ak.hypergryph.com/is/samiexpedition',
+        contentLine1: 'EXPEDITIONER\'S <br>JQKLUMARKAR',
+        contentLine2: '探索者的银凇止境',
+        imgSrc: './img/more1.jpg',
+        iconSrc: './img/集成战略.png',
+      },
+      {
+        backgroundImage: '/img/overlay2.png',
+        redirectUrl: 'https://ak.hypergryph.com/ra/taleswithinthesand',
+        contentLine1: 'TALES WITHIN<br>THE SAND',
+        contentLine2: '沙洲遗闻',
+        imgSrc: './img/more2.jpg',
+        iconSrc: './img/生息演算.png',
+      }
+    ];
+
+    // 计算旋转角度
+    const calcValue = (a, b) => (a / b * range - range / 2).toFixed(1);
+
+    // 鼠标移动事件的处理函数
+    const handleMouseMove = (event) => {
+      if (isOverlayOpen) return; // 如果遮罩层打开，直接返回
+
+      if (timeout) {
+        window.cancelAnimationFrame(timeout);
+      }
+
+      timeout = window.requestAnimationFrame(() => {
+        const yValue = calcValue(event.clientY, window.innerHeight);
+        const xValue = calcValue(event.clientX, window.innerWidth);
+
+        cards.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
+
+        [].forEach.call(images, (image) => {
+          image.style.transform = `translateX(${-xValue / 3}px) translateY(${yValue / 3}px)`;
+        });
+
+        [].forEach.call(backgrounds, (background) => {
+          background.style.backgroundPosition = `${xValue * 0.45}px ${-yValue * 0.45}px`;
+        });
+      });
+    };
+
+    // 监听鼠标移动事件
+    document.addEventListener("mousemove", handleMouseMove, false);
+
+    // 打开覆盖层，传入背景图片，跳转链接和内容
+    window.openOverlay = function (index) {
+      const card = cardData[index];
+      isOverlayOpen = true;
+      const overlay = document.getElementById("overlay");
+      overlay.style.display = "flex";
+      overlay.style.backgroundImage = `url(${card.backgroundImage})`; // 设置背景图
+
+      // 动态设置 content-box 内容
+      const contentBox = document.querySelector(".content-box");
+      contentBox.innerHTML = `
+      <div>${card.contentLine1}</div>
+      <div>${card.contentLine2}</div>
+    `;
+
+      // 设置跳转按钮的链接
+      const navigateButton = document.getElementById("navigate-button");
+      navigateButton.onclick = function () {
+        window.open(card.redirectUrl, "_blank"); // 使用传入的跳转链接
+      };
+    };
+
+    // 关闭覆盖层
+    window.closeOverlay = function () {
+      isOverlayOpen = false;
+      document.getElementById("overlay").style.display = "none";
+    };
+
+    // 为 card__one 和 card__two 添加点击事件
+    document.querySelector(".card__one").addEventListener('click', function () {
+      openOverlay(0);  // 点击 card__one，传递索引 0
+    });
+
+    document.querySelector(".card__two").addEventListener('click', function () {
+      openOverlay(1);  // 点击 card__two，传递索引 1
+    });
+  })();
+
+
+
+
+
+</script>
+
+
+</html>

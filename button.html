@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 设置侧边菜单的基本样式 */
+    .side-menu {
+      width: 23vw;
+      /* 侧边栏的宽度 */
+      height: 100vh;
+      /* 高度为视口高度 */
+      position: fixed;
+      /* 固定位置 */
+      top: 0;
+      right: 0;
+      /* 定位到右边 */
+      background: linear-gradient(135deg, #67b5e9, #2a5298);
+      /* 渐变背景，蓝色系 */
+      color: white;
+      /* 文本颜色 */
+      padding-top: 20px;
+      /* 顶部内边距 */
+      display: flex;
+      flex-direction: column;
+      /* 垂直排列 */
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      /* 右侧阴影效果 */
+      z-index: 1000;
+      /* 确保侧边栏位于页面最前面 */
+    }
+
+    .welcome {
+      font-size: 14px;
+      /* 设置字体大小 */
+      font-weight: bold;
+      margin-top: 100px;
+      margin-bottom: 20px;
+      /* 底部留空间 */
+
+    }
+
+    .side-menu ul {
+      list-style: none;
+      /* 去掉默认的列表样式 */
+      padding: 0;
+      margin: 0;
+    }
+
+    .side-menu li {
+      padding: 15px;
+      border-bottom: 1px solid #444;
+      /* 分隔线 */
+    }
+
+    .side-menu a {
+      color: white;
+      text-decoration: none;
+      /* 去掉链接下划线 */
+      font-size: 16px;
+      display: block;
+    }
+
+    .side-menu a:hover {
+      background-color: #555;
+      /* 鼠标悬停时背景色 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="side-menu">
+    <div class="welcome">
+      WELCOME
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background: linear-gradient(to bottom, #C6426E, #642B73); */
+    perspective: 1800px;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  /* ============= 容器 ============= */
+  .cardContainer {
+    position: relative;
+    display: flex;
+    top: -100px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000000;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
+    padding: 30px 35px;
+    perspective: 1800px;
+    text-align: left;
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+    transform: rotateX(6deg) rotateY(12deg);
+    width: 1500px;
+    height: 650px;
+    z-index: 2;
+  }
+
+  /* ============= 卡片 ============= */
+  .cards {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .card {
+    position: relative;
+    width: 300px;
+    height: 600px;
+    aspect-ratio: 7/10;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.6);
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    transform: translatez(35px);
+    transition: transform 200ms ease-out;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(65, 72, 78, 0.35);
+    /* 半透明黑色覆盖层 */
+    z-index: 1;
+    /* 确保遮罩层在背景下 */
+  }
+
+  .card__img {
+    position: relative;
+    height: 100%;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.8));
+  }
+
+  .card__bg {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    bottom: -50px;
+    right: -50px;
+    transform-origin: 50% 50%;
+    transform: translateZ(-50px);
+    z-index: 0;
+  }
+
+  .card__one .card__bg {
+    background: url("./images/3dr_monobg.jpg") center/cover no-repeat;
+  }
+
+  .card__two .card__bg {
+    background: url("./images/3dr_spirited.jpg") center/cover no-repeat;
+  }
+
+  .card__three .card__bg {
+    background: url("./images/3dr_howlbg.jpg") center/cover no-repeat;
+  }
+
+  /* 由于三个前景图片的尺寸不同，所以需要调整位置和高度 */
+  .card__one .card__img {
+    width: 110%;
+    height: 110%;
+  }
+
+  .card__two .card__img {
+    width: 110%;
+  }
+
+  .card__three .card__img {
+    width: 110%;
+    height: 110%;
+  }
+
+  .card__four .card__img {
+    top: -50px;
+    width: 110%;
+    height: 130%;
+  }
+
+  .card__text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: 2;
+  }
+
+  .card__title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 10px;
+    margin-bottom: 3px;
+  }
+
+  /* ============= 说明 ============= */
+  .notice {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    background: gold;
+    border-top-left-radius: 6px;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="cardContainer">
+    <div class="cards">
+      <a href="https://example.com/mononoke" class="card card__one">
+        <div class="card__bg"></div>
+        <img class="card__img" src="./img/more1.jpg" />
+        <div class="card__text">
+          <p class="card__title">幽灵公主</p>
+        </div>
+      </a>
+      <a href="https://example.com/spiritedaway" class="card card__two">
+        <div class="card__bg"></div>
+        <img class="card__img" src="./img/more2.jpg" />
+        <div class="card__text">
+          <p class="card__title">千与千寻</p>
+        </div>
+      </a>
+      <a href="https://example.com/howlsmovingcastle" class="card card__three">
+        <div class="card__bg"></div>
+        <img class="card__img" src="./img/more3.jpg" />
+        <div class="card__text">
+          <p class="card__title">哈尔的移动城堡</p>
+        </div>
+      </a>
+      <a href="https://example.com/howlsmovingcastle" class="card card__four">
+        <div class="card__bg"></div>
+        <img class="card__img" src="./img/more4.jpg" />
+        <div class="card__text">
+          <p class="card__title">哈尔的移动城堡</p>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+  <span class="notice">鼠标移动显示视差效果</span>
+  <script>
+    (function () {
+      // 获取元素
+      const cards = document.querySelector(".cardContainer");
+      const images = document.querySelectorAll(".card__img");
+      const backgrounds = document.querySelectorAll(".card__bg");
+
+      const range = 40;
+
+      // 计算旋转角度
+      const calcValue = (a, b) => (a / b * range - range / 2).toFixed(1);
+
+      let timeout;
+
+      // 监听鼠标移动事件
+      document.addEventListener('mousemove', (event) => {
+        if (timeout) {
+          window.cancelAnimationFrame(timeout);
+        }
+
+        timeout = window.requestAnimationFrame(() => {
+          // 计算旋转角度
+          const yValue = calcValue(event.clientY, window.innerHeight);
+          const xValue = calcValue(event.clientX, window.innerWidth);
+
+          // 设置旋转角度
+          cards.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
+
+          // 设置图片位移，缩小鼠标移动的幅度（通过除以 3）
+          [].forEach.call(images, image => {
+            image.style.transform = `translateX(${-xValue / 3}px) translateY(${yValue / 3}px)`; // 除以 3 调整幅度
+          });
+
+          // 设置背景位移
+          [].forEach.call(backgrounds, background => {
+            background.style.backgroundPosition = `${xValue * 0.45}px ${-yValue * 0.45}px`;
+          });
+        });
+      }, false);
+    })();
+  </script>
+</body>
+
+</html>

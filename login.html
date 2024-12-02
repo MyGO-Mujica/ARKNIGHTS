@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @font-face {
+      font-family: 'icomoon';
+      src: url('fonts/icomoon.eot?3urpom');
+      src: url('fonts/icomoon.eot?3urpom#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?3urpom') format('truetype'),
+        url('fonts/icomoon.woff?3urpom') format('woff'),
+        url('fonts/icomoon.svg?3urpom#icomoon') format('svg');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      color: #fff;
+    }
+
+    .side-menu {
+      width: 13vw;
+      /* 侧边栏的宽度 */
+      height: 100vh;
+      /* 高度为视口高度 */
+      position: fixed;
+      /* 固定位置 */
+      top: 0;
+      right: 0;
+      /* 定位到右边 */
+      background: linear-gradient(135deg, #7ab3da, #2a5298);
+      /* 渐变背景，蓝色系 */
+      color: white;
+      /* 文本颜色 */
+      padding-top: 20px;
+      /* 顶部内边距 */
+      flex-direction: column;
+      /* 垂直排列 */
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      /* 右侧阴影效果 */
+      z-index: 1000;
+      /* 确保侧边栏位于页面最前面 */
+    }
+
+    .welcome {
+      font-size: 10px;
+      /* 设置字体大小 */
+      font-weight: 700;
+      margin-top: 80px;
+      margin-left: 30px;
+      margin-bottom: 20px;
+      /* 底部留空间 */
+      white-space: nowrap;
+    }
+
+    .image-container {
+      width: 82%;
+      height: 180px;
+      /* 盒子的高度，可以根据需求调整 */
+      margin: 15px 15px 3px 15px;
+      /* 居中显示盒子，并给盒子上下添加间距 */
+      overflow: hidden;
+      /* 隐藏超出盒子范围的部分 */
+    }
+
+    .side-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 图片填充盒子，保持比例 */
+    }
+
+    .image-container2 {
+      width: 120px;
+      height: 17px;
+      margin: 0 auto;
+    }
+
+    .side-menu .user {
+      margin: 10px 0 5px 50px;
+      white-space: nowrap;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 200px;
+    }
+
+    .side-menu li {
+      display: block;
+      width: 120px;
+      height: 20px;
+      background-color: #000;
+      color: #ffffff;
+      margin-left: 40px;
+      margin-bottom: 10px;
+      padding: 2px 0 2px 20px;
+      overflow: hidden;
+      /* 防止溢出 */
+      transition: background-color 0.8s ease, color 0.4s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .side-menu a,
+    .side-menu div {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 20px;
+      display: block;
+      white-space: nowrap;
+      /* 防止换行 */
+    }
+
+    .side-menu span {
+      display: inline-block;
+      /* 确保 span 和 div 在同一行 */
+      vertical-align: middle;
+    }
+
+    .side-menu .icon {
+      font-family: 'icomoon';
+      display: inline-block;
+      margin-left: 45px;
+      /* 给 icon 留一些间距 */
+      vertical-align: middle;
+      /* 让 div 和 span 垂直居中 */
+    }
+
+    .side-menu li:hover {
+      background-color: #ffffff;
+      /* 鼠标悬停时背景变为白色 */
+    }
+
+    .side-menu li:hover a,
+    .side-menu li:hover div {
+      color: #000000;
+      /* 确保链接颜色也变为黑色 */
+    }
+
+    .side-menu-bottom {
+      margin-top: 50px;
+      width: 100%;
+      height: 190px;
+      background-color: rgba(77, 125, 181);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.8s ease, color 0.4s ease, transform 0.2s ease;
+    }
+
+    .side-menu-bottom div {
+      font-family: 'icomoon';
+      font-size: 120px;
+      line-height: 170px;
+      font-weight: lighter;
+      text-align: center;
+    }
+
+    .side-menu-bottom:hover {
+      background-color: #ffffffd5
+    }
+
+    .side-menu-bottom div:hover {
+      color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="side-menu">
+    <div class="welcome">
+      WELCOME &nbsp;&nbsp;———————
+    </div>
+    <div class="image-container">
+      <img src="/img/登录1.png" alt="Your Image" class="side-image">
+    </div>
+    <div class="image-container2">
+      <img src="/img/RHO.png" alt="Your Image" class="side-image">
+    </div>
+    <div class="user">
+      <div>Please login.</div>
+      <div>请先登录您的账号。</div>
+    </div>
+    <ul>
+      <li>
+        <a href="https://customer-service.hypergryph.com/ak" target="_blank"><span>客服中心</span>
+          <div class="icon"></div>
+        </a>
+      </li>
+      <li>
+        <div class="login_btn">
+          <span>立即登录</span>
+          <div class="icon"></div>
+        </div>
+      </li>
+      <li>
+        <div class="login_btn">
+          <span>前往注册</span>
+          <div class="icon"></div>
+        </div>
+      </li>
+    </ul>
+    <div class="side-menu-bottom">
+      <div></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const sideMenu = document.querySelector('.side-menu');
+      const loginButton = document.querySelector('[data-id="login"]');
+      const loginBtns = document.querySelectorAll('.side-menu-bottom');
+
+      // 点击 data-id="login" 时显示侧边栏
+      loginButton.addEventListener('click', function () {
+        sideMenu.style.display = 'flex'; // 显示侧边栏
+      });
+
+      // 点击 .login_btn 时隐藏侧边栏
+      loginBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          sideMenu.style.display = 'none'; // 隐藏侧边栏
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

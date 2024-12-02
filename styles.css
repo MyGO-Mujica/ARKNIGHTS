@@ -1,0 +1,228 @@
+  /* 通用样式 */
+  /* 字体声明 */
+  @font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?ft8553');
+    src: url('fonts/icomoon.eot?ft8553#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?ft8553') format('truetype'),
+      url('fonts/icomoon.woff?ft8553') format('woff'),
+      url('fonts/icomoon.svg?ft8553#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .background-video {
+    position: fixed;
+    top: -20px;
+    width: 100vw;
+    /* 使视频宽度等于视口宽度 */
+    height: 100vh;
+    /* 使视频高度等于视口高度 */
+    object-fit: cover;
+    /* 让视频保持比例同时覆盖整个视口 */
+    z-index: -1;
+    /* 将视频放在所有内容的后面 */
+    transform: scale(1.35);
+    transition: opacity 0.5s ease-in-out;
+
+  }
+
+  .background-video.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Header 样式 */
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(27, 27, 27, 0.35);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+
+  }
+
+  nav {
+    display: flex;
+  }
+
+  .nav .active {
+    color: rgb(25, 209, 255);
+  }
+
+  header .logo img {
+    padding-left: 15px;
+    height: 65px;
+  }
+
+  header nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  header nav .word {
+    gap: 100px;
+  }
+
+  header nav ul li a {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: transform 0.5s;
+  }
+
+  header nav .word .en {
+    letter-spacing: -1px;
+  }
+
+  header nav .wl {
+    margin-left: 30px;
+    gap: 40px;
+    font-family: 'icomoon';
+  }
+
+  header nav ul li a:hover,
+  header nav ul li a .active {
+    color: rgb(25, 209, 255);
+    transform: scale(1.25);
+  }
+
+  header nav .wl .hreat .redactive {
+    color: red;
+  }
+
+  .share-box {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    width: 170px;
+    height: 250px;
+    background: linear-gradient(to bottom, #18D1FF, #0066CC);
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    /* 确保位于页面上层 */
+  }
+
+  .share-box ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    /* 使内容换行 */
+    gap: 10px;
+    /* 图片间距 */
+  }
+
+  .share-box ul li {
+    width: 45%;
+    /* 每行两个图标 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .share-box ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+  }
+
+  .share-box ul li a img {
+    width: 40px;
+    /* 图标大小 */
+    height: 40px;
+    margin-bottom: 5px;
+    /* 图标与文字之间的距离 */
+    transition: transform 0.3s;
+  }
+
+  .share-box ul li a:hover img {
+    transform: scale(1.2);
+    /* 鼠标悬停时放大 */
+  }
+
+
+  .share-box .triangle {
+    position: absolute;
+    right: 137px;
+    top: -29px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-bottom-color: #18D1FF;
+  }
+
+  .share-box .TOOLBOX {
+    position: absolute;
+    top: 32px;
+    left: 35px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0px;
+  }
+
+  /* 页面切换动画 */
+  .page {
+    display: none;
+    /* 初始状态为隐藏 */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* 平滑过渡 */
+  }
+
+  .page.active {
+    display: block;
+    /* 显示状态 */
+    opacity: 1;
+
+  }
+
+  /* 主体部分 */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    /* 确保导航栏不会覆盖内容 */
+    text-align: center;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  main video {
+    width: 100%;
+  }
+
+  /* 页脚样式 */
+  footer {
+    background-color: rgba(27, 27, 27, 0);
+    padding: 10px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 14px;
+  }
