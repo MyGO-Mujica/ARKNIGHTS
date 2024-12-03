@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>明日方舟风格网站</title>
-
   <link rel="stylesheet" href="/swiper/swiper-bundle.css">
   <style>
     /* 通用样式 */
@@ -238,7 +237,7 @@
       width: 82%;
       height: 180px;
       /* 盒子的高度，可以根据需求调整 */
-      margin: 15px 15px 3px 15px;
+      margin: 15px 15px 10px 15px;
       /* 居中显示盒子，并给盒子上下添加间距 */
       overflow: hidden;
       /* 隐藏超出盒子范围的部分 */
@@ -252,8 +251,8 @@
     }
 
     .image-container2 {
-      width: 120px;
-      height: 17px;
+      width: 125px;
+      height: 18px;
       margin: 0 auto;
     }
 
@@ -349,6 +348,187 @@
     .side-menu-bottom div:hover {
       color: #000;
     }
+
+
+    /* 登录框的样式 */
+    .login-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    .login-modal-content {
+      position: relative;
+      background-color: #ffffff;
+      margin: 15% auto;
+      padding: 0 20px 10px 20px;
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      /* 避免超出部分被显示 */
+    }
+
+    .login_head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #000;
+      width: 120%;
+      /* 增加宽度 */
+      height: 80px;
+      /* 高度 */
+      margin-left: -10%;
+      /* 通过左边距调整，确保超出的部分被拉回 */
+      /* 高度 */
+      padding: 0;
+      box-sizing: border-box;
+      border-bottom: 4px solid rgba(0, 152, 220);
+      /* 添加蓝色底部边框 */
+    }
+
+    .login_head img {
+      width: 90px;
+      height: auto;
+      margin-top: 10px;
+      margin-left: 35%;
+
+    }
+
+    .close {
+      font-size: 30px;
+      margin-left: 25%;
+      cursor: pointer;
+      padding-bottom: 30px;
+    }
+
+    .side-menu .alert {
+      width: 100%;
+      height: 22px;
+      font-size: 13px;
+      line-height: 22px;
+      margin-top: -7px;
+      text-align: center;
+      border-radius: 10px;
+      transition: .5s;
+      opacity: 0;
+    }
+
+    .alert.show {
+      opacity: 1;
+    }
+
+    .side-menu .alert-success {
+      color: #0f5132;
+      background-color: #d1e7dd;
+      border-color: #badbcc
+    }
+
+    .side-menu .alert-danger {
+      color: #b62b2b;
+      background-color: #eebfc3;
+      border-color: #f5c2c7
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      color: #000;
+      gap: 35px;
+      padding-top: 10px;
+    }
+
+    .inputBox {
+      position: relative;
+      /* 相对定位，为绝对定位的子元素提供参考 */
+      width: 92%;
+      /* 输入框的宽度 */
+    }
+
+    .inputBox input {
+      width: 100%;
+      /* 输入框宽度为父元素的 100% */
+      height: 25px;
+      padding: 10px;
+      /* 内边距 */
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      /* 边框颜色和透明度 */
+      background: #ffffff;
+      /* 输入框背景颜色 */
+      border-radius: 10px;
+      /* 圆角边框 */
+      outline: none;
+      /* 移除聚焦时的轮廓 */
+      color: #000000;
+      /* 输入文本颜色 */
+      font-size: 1.2em;
+      /* 字体大小 */
+      transition: 0.5s;
+      /* 过渡效果 */
+    }
+
+
+    .inputBox span {
+      position: absolute;
+      /* 绝对定位 */
+      left: 0;
+      /* 左侧对齐 */
+      padding: 12.5px;
+      /* 内边距 */
+      pointer-events: none;
+      /* 禁止事件捕获 */
+      font-size: 1em;
+      /* 字体大小 */
+      color: rgba(0, 0, 0, 0.35);
+      /* 标签颜色和透明度 */
+      transition: 0.5s;
+      /* 过渡效果 */
+    }
+
+    .inputBox input:valid~span,
+    .inputBox input:focus~span {
+      color: #000000;
+      /* 输入框有效或聚焦时标签颜色 */
+      transform: translateX(10px) translateY(-10px);
+      /* 移动标签位置 */
+      font-size: 0.75em;
+      /* 标签字体大小 */
+      padding: 0 5px;
+      /* 内边距 */
+      background: #ffffff;
+      /* 标签背景颜色 */
+      border-left: 0.1px solid #000000;
+      /* 左边框 */
+      border-right: 0.1px solid #000000;
+      /* 右边框 */
+      letter-spacing: 0.2em;
+      /* 字母间距 */
+    }
+
+    .inputBox input:valid,
+    .inputBox input:focus {
+      outline: 2px solid #000000;
+      /* 输入框有效或聚焦时的边框颜色 */
+    }
+
+    form button {
+      padding: 10px;
+      background-color: #000000;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    #switchForm {
+      margin-top: 15px;
+      text-align: center;
+    }
+
 
     /* 页面切换动画 */
     .page {
@@ -1434,13 +1614,13 @@
         </a>
       </li>
       <li>
-        <div class="login_btn">
+        <div class="login_btn" id="loginBtn">
           <span>立即登录</span>
           <div class="icon"></div>
         </div>
       </li>
       <li>
-        <div class="login_btn">
+        <div class="login_btn" id="registerBtn">
           <span>前往注册</span>
           <div class="icon"></div>
         </div>
@@ -1449,6 +1629,71 @@
     <div class="side-menu-bottom">
       <div></div>
     </div>
+
+    <!-- 登录框 -->
+    <div class="login-modal" id="loginModal" style="display: none;">
+      <div class="login-modal-content">
+        <div class="login_head">
+          <img src="/img/login_logo.png" alt="Image" id="closeImage" />
+          <span class="close" id="closeModal">&times;</span>
+        </div>
+        <h2 id="modalTitle" style="color: #000;">登录</h2>
+
+        <!-- 登录表单 -->
+        <div id="loginForm">
+          <div class="alert alert-success" role="alert">
+            JS中会动态插入提示文字
+          </div>
+          <form>
+            <div class="inputBox">
+              <label for="username"></label>
+              <input type="text" id="username" name="username" class="username" required>
+              <span>用户名</span>
+            </div>
+            <div class="inputBox">
+              <label for="password"></label>
+              <input type="password" id="password" name="password" class="password" required>
+              <span>密码</span>
+            </div>
+            <button type="submit" class="btn-login">登录</button>
+          </form>
+        </div>
+
+        <!-- 注册表单 -->
+        <div id="registerForm" style="display:none;">
+          <div class="alert alert-success" role="alert">
+            JS中会动态插入提示文字
+          </div>
+          <form>
+            <div class="inputBox">
+              <label for="username"></label>
+              <input type="text" id="registerUsername" name="username" class="username" required>
+              <span>用户名</span>
+            </div>
+            <div class="inputBox">
+              <label for="password"></label>
+              <input type="password" id="registerPassword" name="password" class="password" required>
+              <span>密码</span>
+            </div>
+            <div class="inputBox">
+              <label for="confirmPassword"></label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="confirmPassword" required>
+              <span>确认密码</span>
+            </div>
+            <button type="submit" class="btn-register">注册</button>
+          </form>
+        </div>
+
+        <!-- 切换到注册或登录的提示 -->
+        <div id="switchForm">
+          <p id="switchText"> <span id="switchToRegisterLink"
+              style="color: rgb(255, 255, 255); cursor: pointer;">还没有账户?立即注册</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
   </div>
   <!-- 主体部分 -->
   <main>
@@ -1763,441 +2008,623 @@
 
 
   <script src="/swiper/swiper-bundle.min.js"></script>
-</body>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 1.获取 alert
+    const alertCom = document.querySelector('.alert')
 
-  (function () {
-    // 处理 .word 中的点击事件
-    document.querySelector('.nav .word').addEventListener('click', function (e) {
-      // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
-      const nav = e.target.closest('a');
-      // 如果点击的是 a 标签（或其子元素），就执行下面的逻辑
-      if (nav) {
-        const old = document.querySelector('.nav1 .active');
+    // 2.抽取提示框的方法
+    function showAlert(msg, classname) {
+      alertCom.innerText = msg
+      alertCom.classList.add(classname)
+      alertCom.classList.add('show')
+      alertCom.style.display = 'block'; // 显示提示框
+      setTimeout(() => {
+        // 延迟隐藏
+        alertCom.classList.remove('show')
+        alertCom.classList.remove(classname)
+      }, 2000);
+    }
 
-        // 如果有 active 类的元素，移除该类
-        if (old) {
-          old.classList.remove('active');
-        }
-        // 为当前点击的 a 标签添加 active 类
-        nav.classList.add('active');
+    // 3.给登录按钮绑定点击事件，提交输入的用户信息到服务器
+    document.querySelector('.btn-login').addEventListener('click', function (event) {
+      event.preventDefault(); // 阻止表单提交
+
+      // 3.1 获取输入的用户名和密码
+      const username = document.querySelector('.username').value.trim();
+      const password = document.querySelector('.password').value.trim();
+
+      // 3.2用户名 密码 长度判断
+      if (username.length < 8) {
+        showAlert('用户名长度需要大于等于8', 'alert-danger')
+        return
       }
+      if (password.length < 6) {
+        showAlert('密码长度需要大于等于6', 'alert-danger')
+        return
+      }
+
+      // 3.3 通过axios提交到服务器 并 提示用户 成功 / 失败
+      axios({
+        url: 'http://hmajax.itheima.net/api/login',
+        method: 'post',
+        data: {
+          username,
+          password
+        }
+      }).then(res => {
+        // 显示提示框
+        showAlert(res.data.message, 'alert-success')
+      }).catch(err => {
+        // 显示警示框
+        showAlert(err.response.data.message, 'alert-danger')
+      })
+    })
+  </script>
+  <script>
+    // 1. 获取 alert
+    const alertComRegister = document.querySelector('#registerForm .alert');
+    const switchToLoginLink = document.getElementById('switchToLoginLink');
+    // 2. 抽取提示框的方法
+    function showAlert(msg, classname) {
+      alertComRegister.innerText = msg;
+      alertComRegister.classList.add(classname);
+      alertComRegister.classList.add('show');
+      alertComRegister.style.display = 'block'; // 显示提示框
+      setTimeout(() => {
+        // 延迟隐藏
+        alertComRegister.classList.remove('show');
+        alertComRegister.classList.remove(classname);
+      }, 2000);
+    }
+
+    // 3. 给注册按钮绑定点击事件，提交输入的用户信息到服务器
+    document.querySelector('.btn-register').addEventListener('click', function (event) {
+      event.preventDefault(); // 阻止表单提交
+
+      // 3.1 获取输入的用户名、密码和确认密码
+      const registerUsername = document.querySelector('#registerUsername').value.trim();
+      const registerPassword = document.querySelector('#registerPassword').value.trim();
+      const confirmPassword = document.querySelector('#confirmPassword').value.trim();
+
+      // 3.2 用户名和密码长度判断
+      if (registerUsername.length < 8) {
+        showAlert('用户名长度需要大于等于8', 'alert-danger');
+        return;
+      }
+      if (registerPassword.length < 6) {
+        showAlert('密码长度需要大于等于6', 'alert-danger');
+        return;
+      }
+
+      // 3.3 确认密码与密码是否一致
+      if (registerPassword !== confirmPassword) {
+        showAlert('密码与确认密码不一致', 'alert-danger');
+        return;
+      }
+
+      // 3.4 通过 axios 提交到服务器 并 提示用户成功 / 失败
+      axios({
+        url: 'http://hmajax.itheima.net/api/register',
+        method: 'post',
+        data: {
+          username: registerUsername,
+          password: registerPassword,
+        }
+      }).then(res => {
+        // 显示提示框
+        showAlert(res.data.message, 'alert-success');
+
+        // 注册成功后 1 秒钟模拟点击 "立即注册" 链接
+        setTimeout(() => {
+          // 手动触发点击事件，模拟点击 #switchToRegisterLink
+          document.getElementById('switchToLoginLink').click();
+        }, 2500); // 1秒后触发点击事件
+      }).catch(err => {
+        // 显示警示框
+        showAlert(err.response.data.message, 'alert-danger');
+      });
     });
-  })();
+  </script>
 
-  (function () {
-    // 处理 .wl 中的点击事件
-    document.querySelector('.nav .wl').addEventListener('click', function (e) {
-      // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
-      const nav = e.target.closest('a');
 
-      if (nav && nav.dataset.id !== 'login') {
-        // 阻止事件冒泡，避免影响 .word 部分
-        e.stopPropagation();
 
-        // 如果点击的是带有 "new" data-name 的链接，做特殊处理
-        if (nav.dataset.name === 'new') {
-          e.target.classList.toggle('redactive');
-        } else {
-          // 为当前点击的 a 标签添加 active 类
-          const old = document.querySelector('.nav2');
+  <script>
+
+    (function () {
+      // 处理 .word 中的点击事件
+      document.querySelector('.nav .word').addEventListener('click', function (e) {
+        // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
+        const nav = e.target.closest('a');
+        // 如果点击的是 a 标签（或其子元素），就执行下面的逻辑
+        if (nav) {
+          const old = document.querySelector('.nav1 .active');
 
           // 如果有 active 类的元素，移除该类
           if (old) {
-            old.classList.toggle('active');
+            old.classList.remove('active');
           }
-
           // 为当前点击的 a 标签添加 active 类
-          nav.classList.toggle('active');
+          nav.classList.add('active');
         }
-      }
-    });
-  })();
-
-  (function () {
-    const shareBox = document.querySelector('.share-box');
-    shareBox.style.display = 'none'; // 初始隐藏
-    document.querySelector('.share').addEventListener('click', function (e) {
-      shareBox.style.display = shareBox.style.display === 'none' ? 'block' : 'none';
-    });
-  })();
-
-  (function () {
-    const sideMenu = document.querySelector('.side-menu');
-    const loginButton = document.querySelector('[data-id="login"]');
-    const loginBtns = document.querySelectorAll('.side-menu-bottom');
-
-    // 点击 data-id="login" 时显示侧边栏
-    loginButton.addEventListener('click', function () {
-      sideMenu.style.display = 'flex'; // 显示侧边栏
-    });
-
-    // 点击 .login_btn 时隐藏侧边栏
-    loginBtns.forEach(btn => {
-      btn.addEventListener('click', function () {
-        sideMenu.style.display = 'none'; // 隐藏侧边栏
       });
-    });
-  })();
-  // Hash 路由实现
-  function handleHashChange() {
-    const video = document.querySelector('.background-video');
-    const hash = window.location.hash || '#index'; // 默认显示首页
-    const sections = document.querySelectorAll('.page');
+    })();
 
-    // 切换每个页面
-    sections.forEach(section => {
-      if ('#' + section.id === hash) {
-        section.classList.add('active'); // 当前页面添加 active 类
-      } else {
-        section.classList.remove('active'); // 移除 active 类
-      }
-    });
+    (function () {
+      // 处理 .wl 中的点击事件
+      document.querySelector('.nav .wl').addEventListener('click', function (e) {
+        // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
+        const nav = e.target.closest('a');
 
-    document.querySelectorAll('.wl a').forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault(); // 阻止默认跳转行为
-        // 这里可以加入你的其他逻辑代码
-      });
-    });
-    // 更新导航栏的 active 状态
-    const links = document.querySelectorAll('.nav .hash');
-    links.forEach(link => {
-      if (link.getAttribute('href') === hash) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
+        if (nav && nav.dataset.id !== 'login') {
+          // 阻止事件冒泡，避免影响 .word 部分
+          e.stopPropagation();
 
-    // 如果是首页显示视频，否则隐藏视频
-    if (hash === '#index') {
-      video.classList.remove('hidden');
-    } else {
-      video.classList.add('hidden');
-    }
-  }
-  function resetToIndex() {
-    if (window.location.hash !== '#index') {
-      window.location.hash = '#index'; // 设置为首页的哈希
-    }
-  }
-  window.addEventListener('hashchange', handleHashChange);
-  window.addEventListener('load', () => {
-    resetToIndex(); // 刷新页面回到首页
-    handleHashChange(); // 触发 hash 路由更新
-  });
-
-  var swiper = new Swiper(".mySwiper", {
-    autoplay: true,
-    scrollbar: {
-      el: ".swiper-scrollbar",
-      hide: true,
-    },
-  });
-  (function () {
-    const boardItems = document.querySelectorAll('.board-bnt div');
-
-    // 为每个 div 添加点击事件
-    boardItems.forEach(item => {
-      item.addEventListener('click', () => {
-        // 移除其他元素的 selected 类
-        boardItems.forEach(div => div.classList.remove('selected'));
-        // 为当前点击的元素添加 selected 类
-        item.classList.add('selected');
-      });
-    });
-
-  })();
-  (function () {
-    // 获取所有按钮
-    const buttons = document.querySelectorAll('.board-bnt div');
-    // 获取所有公告区域
-    const announcementSections = document.querySelectorAll('.board-announcements');
-
-    // 为每个按钮添加点击事件
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        // 获取当前按钮的分类
-        const category = button.getAttribute('data-category');
-
-        // 移除其他按钮的 `selected` 类，给当前按钮添加 `selected` 类
-        buttons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-
-        // 显示对应分类的公告区域，隐藏其他公告区域
-        announcementSections.forEach(section => {
-          if (section.getAttribute('data-category') === category) {
-            section.style.display = 'flex'; // 显示匹配的区域
+          // 如果点击的是带有 "new" data-name 的链接，做特殊处理
+          if (nav.dataset.name === 'new') {
+            e.target.classList.toggle('redactive');
           } else {
-            section.style.display = 'none'; // 隐藏其他区域
+            // 为当前点击的 a 标签添加 active 类
+            const old = document.querySelector('.nav2');
+
+            // 如果有 active 类的元素，移除该类
+            if (old) {
+              old.classList.toggle('active');
+            }
+
+            // 为当前点击的 a 标签添加 active 类
+            nav.classList.toggle('active');
           }
+        }
+      });
+    })();
+
+    (function () {
+      const shareBox = document.querySelector('.share-box');
+      shareBox.style.display = 'none'; // 初始隐藏
+      document.querySelector('.share').addEventListener('click', function (e) {
+        shareBox.style.display = shareBox.style.display === 'none' ? 'block' : 'none';
+      });
+    })();
+
+    (function () {
+      const sideMenu = document.querySelector('.side-menu');
+      const loginButton = document.querySelector('[data-id="login"]');
+      const loginBtns = document.querySelectorAll('.side-menu-bottom');
+
+      // 点击 data-id="login" 时显示侧边栏
+      loginButton.addEventListener('click', function () {
+        sideMenu.style.display = 'flex'; // 显示侧边栏
+      });
+
+      // 点击 .login_btn 时隐藏侧边栏
+      loginBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          sideMenu.style.display = 'none'; // 隐藏侧边栏
         });
       });
-    });
 
-    // 默认选中第一个按钮，并显示其对应内容
-    buttons[0].classList.add('selected');
-    announcementSections.forEach((section, index) => {
-      section.style.display = index === 0 ? 'flex' : 'none';
-    });
+      // 获取模态框和按钮
+      const loginModal = document.getElementById('loginModal');
+      const loginBtn = document.getElementById('loginBtn');
+      const registerBtn = document.getElementById('registerBtn');
+      const closeModal = document.getElementById('closeModal');
+      const switchText = document.getElementById('switchText');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const modalTitle = document.getElementById('modalTitle');
 
-  })();
-  (function () {
-    // 获取气泡容器
-    const bubblesContainer = document.querySelector('.bubbles-bottom');
-
-    // 设置气泡的数量（降低生成的气泡数量）
-    const bubbleCount = 25; // 每次生成 25 个气泡
-
-    // 随机生成气泡
-    function createBubble() {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble-bottom');
-
-      // 随机设置气泡大小（在5px到10px之间）
-      const size = Math.random() * (10 - 3) + 3;
-      bubble.style.width = `${size}px`;
-      bubble.style.height = `${size}px`;
-
-      // 随机设置气泡出现的水平位置
-      const leftPosition = Math.random() * 100;  // 水平位置：0% 到 100%
-      bubble.style.left = `${leftPosition}%`;
-
-      // 随机设置气泡的上升速度（3秒到6秒之间）
-      const duration = Math.random() * (8 - 3) + 3;
-      bubble.style.animationDuration = `${duration}s`;
-
-      // 随机设置气泡的延迟时间（0到2秒之间）
-      const delay = Math.random() * 2;
-      bubble.style.animationDelay = `${delay}s`;
-
-      // 将气泡添加到容器中
-      bubblesContainer.appendChild(bubble);
-
-      // 在动画完成后移除气泡
-      bubble.addEventListener('animationend', () => {
-        bubble.remove();
-      });
-    }
-
-    // 每隔500毫秒生成一定数量的气泡
-    setInterval(createBubble, 800); // 每500毫秒生成25个气泡
-  })();
-
-  // 数据：角色名称、描述和本地背景图片路径
-  (function () {
-    const characterData = [
-      {
-        name: "阿米娅",
-        description: "罗德岛的公开领袖，在内部拥有最高执行权。虽然，从外表上看起来仅仅是个不成熟的少女，实际上，她却是深受大家信任的合格的领袖。现在，阿米娅正带领着罗德岛，为了感染者的未来，为了让这片大地挣脱矿石病的阴霾而不懈努力。很难想象她幼小稚嫩的肩上已经担上了怎么用艰巨重大的责任。",
-        background: "img/立绘_阿米娅_2.png",
-        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)8%, rgba(30,57,136, 0.6),rgba(104,36,43))"
-      },
-      {
-        name: "斯卡蒂",
-        description: "此刻的祂也是独身，孤独地拖着自己吞噬过的万物，在将死的宇宙中漂流到了时间的尽头。那么此刻，祂是否也该对自己身躯里那些无动于衷的养分歌唱？如果是斯卡蒂的话，她一定会歌唱。在她思考清楚那些复杂的问题之前，她的歌声就会先涌出来——因为歌声就是她的话语、她的想象、她的创造。",
-        background: "img/立绘_浊心斯卡蒂背景.png",
-        gradient: "linear-gradient(135deg, rgba(179,173,175, 1) 15%, rgba(120, 120, 160, 0.8) 60%, rgba(52,58,77) 80%)"
-      },
-      {
-        name: "灰喉",
-        description: "她在如火的夕阳下醒来。她记起来，她在甘糖城救下了很多人，很多很多人。她想起了自己的母亲，她忽感悲伤，却又笑了。她理解了父亲，可还没能找到她的母亲。她能找到吗？她会找到吗？想到这，她略感头痛，但出奇轻松。她转过头去，对着那个同样受伤不轻的大菲林大骂道：“煌！你就不能换个办法叫醒我吗？”",
-        background: "img/立绘_灰喉_skin1.png",
-        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)15%, rgba(73,175,175)40%,rgba(60,109,126) 60%)"
-      },
-      {
-        name: "夕",
-        description: "“有兽色青 形似重峦其数十一 戴月披烟云涛微茫 暮沉色见须靛似林 骨峭如石语曰 星藏点雪 月隐晦明人有清浊 色有佳劣五兵难伤 五火难防焚其血肉 墨泉流涌 雾穷烟尽 两首无羁然其兽难制 晨昏方易 顿尔消弭其形亦伪 其物亦伪笔缀卷阖 如醉似痴 一夕烬尽”......其薨，余皆俯首，由此开太平之先。",
-        background: "img/立绘_夕_skin1.png",
-        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)6%, rgba(27,84,134, 0.9),rgba(136,177,169)80%)"
-      },
-      {
-        name: "忍冬",
-        description: "忍冬确信，就像真的曾将这盒拼图完成过无数次一样。以那片孤零零的拼图为圆心，她似乎看见了一只追逐自己尾巴的狼，一圈又一圈，乐此不疲。她摇摇头，干脆弯起手指将那片拼图从桌上弹飞。“这不是休假时该想的事情。”她朝宿舍外走去。预约的理疗时间到了吗？不重要，假期中的杀手可以奢侈地使用她的时间。",
-        background: "img/立绘_忍冬_2.png",
-        gradient: "linear-gradient(135deg, rgba(179,173,175, 1)5%, rgba(243,231,192, 0.9),rgba(85,86,126) 80%)"
-      }
-    ];
-
-    // 获取元素
-    const carouselImages = document.querySelector('.carousel-images');
-    const prevButton = document.getElementById('prev');
-    const nextButton = document.getElementById('next');
-    const characterName = document.getElementById('character-name');
-    const characterDescription = document.getElementById('character-description');
-    const descriptionArea = document.getElementById('description-area');
-    const carousel = document.querySelector('.carousel'); // 轮播图容器
-    let currentIndex = 0;
-    let autoPlayInterval; // 用于保存自动播放的定时器
-
-    // 更新角色介绍
-    function updateCharacterInfo(index) {
-      const character = characterData[index];
-      characterName.textContent = character.name;
-      characterDescription.textContent = character.description;
-      descriptionArea.style.backgroundImage = `url(${character.background})`;
-      carousel.style.background = character.gradient; // 动态更新轮播图的渐变背景
-    }
-
-    // 切换动画
-    function animateDescription(index) {
-      descriptionArea.classList.remove("fade-in");
-      descriptionArea.classList.add("fade-out");
-
-      setTimeout(() => {
-        updateCharacterInfo(index); // 更新内容
-        descriptionArea.classList.remove("fade-out");
-        descriptionArea.classList.add("fade-in");
-      }, 0); // 动画时长与 CSS 一致
-    }
-
-    // 切换到指定索引
-    function showSlide(index) {
-      if (index < 0) {
-        currentIndex = characterData.length - 1; // 回到最后一张
-      } else if (index >= characterData.length) {
-        currentIndex = 0; // 回到第一张
-      } else {
-        currentIndex = index;
-      }
-      carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-      animateDescription(currentIndex);
-    }
-
-    // 按钮事件监听
-    prevButton.addEventListener("click", () => showSlide(currentIndex - 1));
-    nextButton.addEventListener("click", () => showSlide(currentIndex + 1));
-
-    // 自动播放功能：每隔3秒自动点击"下一张"按钮
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(() => {
-        nextButton.click(); // 模拟点击“下一张”按钮
-      }, 5000); // 每隔3秒自动点击
-    }
-
-    // 停止自动播放
-    function stopAutoPlay() {
-      clearInterval(autoPlayInterval);
-    }
-
-    // 鼠标悬停时停止自动播放
-    carousel.addEventListener("mouseenter", stopAutoPlay);
-
-    // 鼠标移出时重新启动自动播放
-    carousel.addEventListener("mouseleave", startAutoPlay);
-
-    // 初始化第一个角色
-    updateCharacterInfo(0);
-
-    // 开始自动播放
-    startAutoPlay();
-  })();
-
-  (function () {
-    // 获取元素
-    const cards = document.querySelector(".cardContainer");
-    const cardItems = document.querySelectorAll(".card");
-    const images = document.querySelectorAll(".card__img");
-    const backgrounds = document.querySelectorAll(".card__bg");
-
-    const range = 40;
-    let timeout;
-    let isOverlayOpen = false; // 标志位：遮罩层是否打开
-
-    // 卡片数据数组，只包含 card__one 和 card__two
-    const cardData = [
-      {
-        backgroundImage: '/img/overlay1.png',
-        redirectUrl: 'https://ak.hypergryph.com/is/samiexpedition',
-        contentLine1: 'EXPEDITIONER\'S <br>JQKLUMARKAR',
-        contentLine2: '探索者的银凇止境',
-        imgSrc: './img/more1.jpg',
-        iconSrc: './img/集成战略.png',
-      },
-      {
-        backgroundImage: '/img/overlay2.png',
-        redirectUrl: 'https://ak.hypergryph.com/ra/taleswithinthesand',
-        contentLine1: 'TALES WITHIN<br>THE SAND',
-        contentLine2: '沙洲遗闻',
-        imgSrc: './img/more2.jpg',
-        iconSrc: './img/生息演算.png',
-      }
-    ];
-
-    // 计算旋转角度
-    const calcValue = (a, b) => (a / b * range - range / 2).toFixed(1);
-
-    // 鼠标移动事件的处理函数
-    const handleMouseMove = (event) => {
-      if (isOverlayOpen) return; // 如果遮罩层打开，直接返回
-
-      if (timeout) {
-        window.cancelAnimationFrame(timeout);
-      }
-
-      timeout = window.requestAnimationFrame(() => {
-        const yValue = calcValue(event.clientY, window.innerHeight);
-        const xValue = calcValue(event.clientX, window.innerWidth);
-
-        cards.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
-
-        [].forEach.call(images, (image) => {
-          image.style.transform = `translateX(${-xValue / 3}px) translateY(${yValue / 3}px)`;
-        });
-
-        [].forEach.call(backgrounds, (background) => {
-          background.style.backgroundPosition = `${xValue * 0.45}px ${-yValue * 0.45}px`;
-        });
-      });
-    };
-
-    // 监听鼠标移动事件
-    document.addEventListener("mousemove", handleMouseMove, false);
-
-    // 打开覆盖层，传入背景图片，跳转链接和内容
-    window.openOverlay = function (index) {
-      const card = cardData[index];
-      isOverlayOpen = true;
-      const overlay = document.getElementById("overlay");
-      overlay.style.display = "flex";
-      overlay.style.backgroundImage = `url(${card.backgroundImage})`; // 设置背景图
-
-      // 动态设置 content-box 内容
-      const contentBox = document.querySelector(".content-box");
-      contentBox.innerHTML = `
-      <div>${card.contentLine1}</div>
-      <div>${card.contentLine2}</div>
-    `;
-
-      // 设置跳转按钮的链接
-      const navigateButton = document.getElementById("navigate-button");
-      navigateButton.onclick = function () {
-        window.open(card.redirectUrl, "_blank"); // 使用传入的跳转链接
+      // 打开登录框
+      const openModal = () => {
+        loginModal.style.display = 'block';
+        showLoginForm(); // 默认显示登录表单
       };
-    };
 
-    // 关闭覆盖层
-    window.closeOverlay = function () {
-      isOverlayOpen = false;
-      document.getElementById("overlay").style.display = "none";
-    };
+      // 关闭登录框
+      const closeModalHandler = () => {
+        loginModal.style.display = 'none';
+      };
 
-    // 为 card__one 和 card__two 添加点击事件
-    document.querySelector(".card__one").addEventListener('click', function () {
-      openOverlay(0);  // 点击 card__one，传递索引 0
+      // 显示登录表单
+      const showLoginForm = () => {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        modalTitle.textContent = '';
+        // 切换提示文字
+        switchText.innerHTML = ' <span id="switchToRegisterLink" style="color: gray; cursor: pointer;">还没有账户? 立即注册</span>';
+
+        // 绑定点击事件
+        const switchToRegisterLink = document.getElementById('switchToRegisterLink');
+        switchToRegisterLink.removeEventListener('click', showRegisterForm);  // 移除可能存在的事件
+        switchToRegisterLink.addEventListener('click', showRegisterForm);  // 重新绑定事件
+      };
+
+      // 显示注册表单
+      const showRegisterForm = () => {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        modalTitle.textContent = '';
+        // 切换提示文字
+        switchText.innerHTML = '<span id="switchToLoginLink" style="color: gray; cursor: pointer;">已经有账户?  立即登录</span>';
+
+        // 绑定点击事件
+        const switchToLoginLink = document.getElementById('switchToLoginLink');
+        switchToLoginLink.addEventListener('click', showLoginForm);  // 重新绑定事件
+      };
+
+      // 点击“立即登录”和“前往注册”按钮时弹出登录框
+      loginBtn.addEventListener('click', openModal);
+      registerBtn.addEventListener('click', openModal);
+
+      // 点击关闭按钮时关闭模态框
+      closeModal.addEventListener('click', closeModalHandler);
+
+
+    })();
+
+
+
+    // Hash 路由实现
+    function handleHashChange() {
+      const video = document.querySelector('.background-video');
+      const hash = window.location.hash || '#index'; // 默认显示首页
+      const sections = document.querySelectorAll('.page');
+
+      // 切换每个页面
+      sections.forEach(section => {
+        if ('#' + section.id === hash) {
+          section.classList.add('active'); // 当前页面添加 active 类
+        } else {
+          section.classList.remove('active'); // 移除 active 类
+        }
+      });
+
+      document.querySelectorAll('.wl a').forEach(link => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault(); // 阻止默认跳转行为
+          // 这里可以加入你的其他逻辑代码
+        });
+      });
+      // 更新导航栏的 active 状态
+      const links = document.querySelectorAll('.nav .hash');
+      links.forEach(link => {
+        if (link.getAttribute('href') === hash) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // 如果是首页显示视频，否则隐藏视频
+      if (hash === '#index') {
+        video.classList.remove('hidden');
+      } else {
+        video.classList.add('hidden');
+      }
+    }
+    function resetToIndex() {
+      if (window.location.hash !== '#index') {
+        window.location.hash = '#index'; // 设置为首页的哈希
+      }
+    }
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('load', () => {
+      resetToIndex(); // 刷新页面回到首页
+      handleHashChange(); // 触发 hash 路由更新
     });
 
-    document.querySelector(".card__two").addEventListener('click', function () {
-      openOverlay(1);  // 点击 card__two，传递索引 1
+    var swiper = new Swiper(".mySwiper", {
+      autoplay: true,
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        hide: true,
+      },
     });
-  })();
+    (function () {
+      const boardItems = document.querySelectorAll('.board-bnt div');
+
+      // 为每个 div 添加点击事件
+      boardItems.forEach(item => {
+        item.addEventListener('click', () => {
+          // 移除其他元素的 selected 类
+          boardItems.forEach(div => div.classList.remove('selected'));
+          // 为当前点击的元素添加 selected 类
+          item.classList.add('selected');
+        });
+      });
+
+    })();
+    (function () {
+      // 获取所有按钮
+      const buttons = document.querySelectorAll('.board-bnt div');
+      // 获取所有公告区域
+      const announcementSections = document.querySelectorAll('.board-announcements');
+
+      // 为每个按钮添加点击事件
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          // 获取当前按钮的分类
+          const category = button.getAttribute('data-category');
+
+          // 移除其他按钮的 `selected` 类，给当前按钮添加 `selected` 类
+          buttons.forEach(btn => btn.classList.remove('selected'));
+          button.classList.add('selected');
+
+          // 显示对应分类的公告区域，隐藏其他公告区域
+          announcementSections.forEach(section => {
+            if (section.getAttribute('data-category') === category) {
+              section.style.display = 'flex'; // 显示匹配的区域
+            } else {
+              section.style.display = 'none'; // 隐藏其他区域
+            }
+          });
+        });
+      });
+
+      // 默认选中第一个按钮，并显示其对应内容
+      buttons[0].classList.add('selected');
+      announcementSections.forEach((section, index) => {
+        section.style.display = index === 0 ? 'flex' : 'none';
+      });
+
+    })();
+    (function () {
+      // 获取气泡容器
+      const bubblesContainer = document.querySelector('.bubbles-bottom');
+
+      // 设置气泡的数量（降低生成的气泡数量）
+      const bubbleCount = 25; // 每次生成 25 个气泡
+
+      // 随机生成气泡
+      function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble-bottom');
+
+        // 随机设置气泡大小（在5px到10px之间）
+        const size = Math.random() * (10 - 3) + 3;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+
+        // 随机设置气泡出现的水平位置
+        const leftPosition = Math.random() * 100;  // 水平位置：0% 到 100%
+        bubble.style.left = `${leftPosition}%`;
+
+        // 随机设置气泡的上升速度（3秒到6秒之间）
+        const duration = Math.random() * (8 - 3) + 3;
+        bubble.style.animationDuration = `${duration}s`;
+
+        // 随机设置气泡的延迟时间（0到2秒之间）
+        const delay = Math.random() * 2;
+        bubble.style.animationDelay = `${delay}s`;
+
+        // 将气泡添加到容器中
+        bubblesContainer.appendChild(bubble);
+
+        // 在动画完成后移除气泡
+        bubble.addEventListener('animationend', () => {
+          bubble.remove();
+        });
+      }
+
+      // 每隔500毫秒生成一定数量的气泡
+      setInterval(createBubble, 800); // 每500毫秒生成25个气泡
+    })();
+
+    // 数据：角色名称、描述和本地背景图片路径
+    (function () {
+      const characterData = [
+        {
+          name: "阿米娅",
+          description: "罗德岛的公开领袖，在内部拥有最高执行权。虽然，从外表上看起来仅仅是个不成熟的少女，实际上，她却是深受大家信任的合格的领袖。现在，阿米娅正带领着罗德岛，为了感染者的未来，为了让这片大地挣脱矿石病的阴霾而不懈努力。很难想象她幼小稚嫩的肩上已经担上了怎么用艰巨重大的责任。",
+          background: "img/立绘_阿米娅_2.png",
+          gradient: "linear-gradient(135deg, rgba(179,173,175, 1)8%, rgba(30,57,136, 0.6),rgba(104,36,43))"
+        },
+        {
+          name: "斯卡蒂",
+          description: "此刻的祂也是独身，孤独地拖着自己吞噬过的万物，在将死的宇宙中漂流到了时间的尽头。那么此刻，祂是否也该对自己身躯里那些无动于衷的养分歌唱？如果是斯卡蒂的话，她一定会歌唱。在她思考清楚那些复杂的问题之前，她的歌声就会先涌出来——因为歌声就是她的话语、她的想象、她的创造。",
+          background: "img/立绘_浊心斯卡蒂背景.png",
+          gradient: "linear-gradient(135deg, rgba(179,173,175, 1) 15%, rgba(120, 120, 160, 0.8) 60%, rgba(52,58,77) 80%)"
+        },
+        {
+          name: "灰喉",
+          description: "她在如火的夕阳下醒来。她记起来，她在甘糖城救下了很多人，很多很多人。她想起了自己的母亲，她忽感悲伤，却又笑了。她理解了父亲，可还没能找到她的母亲。她能找到吗？她会找到吗？想到这，她略感头痛，但出奇轻松。她转过头去，对着那个同样受伤不轻的大菲林大骂道：“煌！你就不能换个办法叫醒我吗？”",
+          background: "img/立绘_灰喉_skin1.png",
+          gradient: "linear-gradient(135deg, rgba(179,173,175, 1)15%, rgba(73,175,175)40%,rgba(60,109,126) 60%)"
+        },
+        {
+          name: "夕",
+          description: "“有兽色青 形似重峦其数十一 戴月披烟云涛微茫 暮沉色见须靛似林 骨峭如石语曰 星藏点雪 月隐晦明人有清浊 色有佳劣五兵难伤 五火难防焚其血肉 墨泉流涌 雾穷烟尽 两首无羁然其兽难制 晨昏方易 顿尔消弭其形亦伪 其物亦伪笔缀卷阖 如醉似痴 一夕烬尽”......其薨，余皆俯首，由此开太平之先。",
+          background: "img/立绘_夕_skin1.png",
+          gradient: "linear-gradient(135deg, rgba(179,173,175, 1)6%, rgba(27,84,134, 0.9),rgba(136,177,169)80%)"
+        },
+        {
+          name: "忍冬",
+          description: "忍冬确信，就像真的曾将这盒拼图完成过无数次一样。以那片孤零零的拼图为圆心，她似乎看见了一只追逐自己尾巴的狼，一圈又一圈，乐此不疲。她摇摇头，干脆弯起手指将那片拼图从桌上弹飞。“这不是休假时该想的事情。”她朝宿舍外走去。预约的理疗时间到了吗？不重要，假期中的杀手可以奢侈地使用她的时间。",
+          background: "img/立绘_忍冬_2.png",
+          gradient: "linear-gradient(135deg, rgba(179,173,175, 1)5%, rgba(243,231,192, 0.9),rgba(85,86,126) 80%)"
+        }
+      ];
+
+      // 获取元素
+      const carouselImages = document.querySelector('.carousel-images');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+      const characterName = document.getElementById('character-name');
+      const characterDescription = document.getElementById('character-description');
+      const descriptionArea = document.getElementById('description-area');
+      const carousel = document.querySelector('.carousel'); // 轮播图容器
+      let currentIndex = 0;
+      let autoPlayInterval; // 用于保存自动播放的定时器
+
+      // 更新角色介绍
+      function updateCharacterInfo(index) {
+        const character = characterData[index];
+        characterName.textContent = character.name;
+        characterDescription.textContent = character.description;
+        descriptionArea.style.backgroundImage = `url(${character.background})`;
+        carousel.style.background = character.gradient; // 动态更新轮播图的渐变背景
+      }
+
+      // 切换动画
+      function animateDescription(index) {
+        descriptionArea.classList.remove("fade-in");
+        descriptionArea.classList.add("fade-out");
+
+        setTimeout(() => {
+          updateCharacterInfo(index); // 更新内容
+          descriptionArea.classList.remove("fade-out");
+          descriptionArea.classList.add("fade-in");
+        }, 0); // 动画时长与 CSS 一致
+      }
+
+      // 切换到指定索引
+      function showSlide(index) {
+        if (index < 0) {
+          currentIndex = characterData.length - 1; // 回到最后一张
+        } else if (index >= characterData.length) {
+          currentIndex = 0; // 回到第一张
+        } else {
+          currentIndex = index;
+        }
+        carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+        animateDescription(currentIndex);
+      }
+
+      // 按钮事件监听
+      prevButton.addEventListener("click", () => showSlide(currentIndex - 1));
+      nextButton.addEventListener("click", () => showSlide(currentIndex + 1));
+
+      // 自动播放功能：每隔3秒自动点击"下一张"按钮
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+          nextButton.click(); // 模拟点击“下一张”按钮
+        }, 5000); // 每隔3秒自动点击
+      }
+
+      // 停止自动播放
+      function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+      }
+
+      // 鼠标悬停时停止自动播放
+      carousel.addEventListener("mouseenter", stopAutoPlay);
+
+      // 鼠标移出时重新启动自动播放
+      carousel.addEventListener("mouseleave", startAutoPlay);
+
+      // 初始化第一个角色
+      updateCharacterInfo(0);
+
+      // 开始自动播放
+      startAutoPlay();
+    })();
+
+    (function () {
+      // 获取元素
+      const cards = document.querySelector(".cardContainer");
+      const cardItems = document.querySelectorAll(".card");
+      const images = document.querySelectorAll(".card__img");
+      const backgrounds = document.querySelectorAll(".card__bg");
+
+      const range = 40;
+      let timeout;
+      let isOverlayOpen = false; // 标志位：遮罩层是否打开
+
+      // 卡片数据数组，只包含 card__one 和 card__two
+      const cardData = [
+        {
+          backgroundImage: '/img/overlay1.png',
+          redirectUrl: 'https://ak.hypergryph.com/is/samiexpedition',
+          contentLine1: 'EXPEDITIONER\'S <br>JQKLUMARKAR',
+          contentLine2: '探索者的银凇止境',
+          imgSrc: './img/more1.jpg',
+          iconSrc: './img/集成战略.png',
+        },
+        {
+          backgroundImage: '/img/overlay2.png',
+          redirectUrl: 'https://ak.hypergryph.com/ra/taleswithinthesand',
+          contentLine1: 'TALES WITHIN<br>THE SAND',
+          contentLine2: '沙洲遗闻',
+          imgSrc: './img/more2.jpg',
+          iconSrc: './img/生息演算.png',
+        }
+      ];
+
+      // 计算旋转角度
+      const calcValue = (a, b) => (a / b * range - range / 2).toFixed(1);
+
+      // 鼠标移动事件的处理函数
+      const handleMouseMove = (event) => {
+        if (isOverlayOpen) return; // 如果遮罩层打开，直接返回
+
+        if (timeout) {
+          window.cancelAnimationFrame(timeout);
+        }
+
+        timeout = window.requestAnimationFrame(() => {
+          const yValue = calcValue(event.clientY, window.innerHeight);
+          const xValue = calcValue(event.clientX, window.innerWidth);
+
+          cards.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
+
+          [].forEach.call(images, (image) => {
+            image.style.transform = `translateX(${-xValue / 3}px) translateY(${yValue / 3}px)`;
+          });
+
+          [].forEach.call(backgrounds, (background) => {
+            background.style.backgroundPosition = `${xValue * 0.45}px ${-yValue * 0.45}px`;
+          });
+        });
+      };
+
+      // 监听鼠标移动事件
+      document.addEventListener("mousemove", handleMouseMove, false);
+
+      // 打开覆盖层，传入背景图片，跳转链接和内容
+      window.openOverlay = function (index) {
+        const card = cardData[index];
+        isOverlayOpen = true;
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "flex";
+        overlay.style.backgroundImage = `url(${card.backgroundImage})`; // 设置背景图
+
+        // 动态设置 content-box 内容
+        const contentBox = document.querySelector(".content-box");
+        contentBox.innerHTML = `
+        <div>${card.contentLine1}</div>
+        <div>${card.contentLine2}</div>
+      `;
+
+        // 设置跳转按钮的链接
+        const navigateButton = document.getElementById("navigate-button");
+        navigateButton.onclick = function () {
+          window.open(card.redirectUrl, "_blank"); // 使用传入的跳转链接
+        };
+      };
+
+      // 关闭覆盖层
+      window.closeOverlay = function () {
+        isOverlayOpen = false;
+        document.getElementById("overlay").style.display = "none";
+      };
+
+      // 为 card__one 和 card__two 添加点击事件
+      document.querySelector(".card__one").addEventListener('click', function () {
+        openOverlay(0);  // 点击 card__one，传递索引 0
+      });
+
+      document.querySelector(".card__two").addEventListener('click', function () {
+        openOverlay(1);  // 点击 card__two，传递索引 1
+      });
+    })();
 
 
 
 
 
-</script>
+  </script>
+</body>
+
 
 
 </html>
