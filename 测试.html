@@ -250,6 +250,7 @@
       /* 图片填充盒子，保持比例 */
     }
 
+
     .image-container2 {
       width: 125px;
       height: 18px;
@@ -259,6 +260,12 @@
     .side-menu .user {
       margin: 10px 0 5px 50px;
       white-space: nowrap;
+      gap: 5px;
+    }
+
+    .side-menu .user-name,
+    .side-menu .welcomeBlck {
+      font-size: 14.5px;
     }
 
     .side-menu ul {
@@ -520,6 +527,7 @@
       background-color: #000000;
       color: white;
       border: none;
+      border-radius: 20px;
       cursor: pointer;
     }
 
@@ -1604,8 +1612,8 @@
       <img src="/img/RHO.png" alt="Your Image" class="side-image">
     </div>
     <div class="user">
-      <div>Please login.</div>
-      <div>请先登录您的账号。</div>
+      <div class="user-name">Please login.</div>
+      <div class="welcomeBlck">请先登录您的账号。</div>
     </div>
     <ul>
       <li>
@@ -1615,13 +1623,19 @@
       </li>
       <li>
         <div class="login_btn" id="loginBtn">
-          <span>立即登录</span>
+          <span>立即登录 </span>
           <div class="icon"></div>
         </div>
       </li>
-      <li>
+      <li class="registerli">
         <div class="login_btn" id="registerBtn">
           <span>前往注册</span>
+          <div class="icon"></div>
+        </div>
+      </li>
+      <li class="outBtnLi" style="display: none;">
+        <div class="login_btn" id="outBtn">
+          <span>登出账户</span>
           <div class="icon"></div>
         </div>
       </li>
@@ -2010,41 +2024,63 @@
   <script src="/swiper/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    // 1.获取 alert
-    const alertCom = document.querySelector('.alert')
+    // 页面加载时检查localStorage，恢复状态
+    // 页面加载时检查 localStorage，恢复状态
+    window.addEventListener('DOMContentLoaded', function () {
+      const savedUsername = localStorage.getItem('username');
+      const savedImage = localStorage.getItem('imageSrc');
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-    // 2.抽取提示框的方法
+      if (isLoggedIn === 'true') {
+        // 如果用户已登录，恢复页面状态
+        document.querySelector('.side-image').src = savedImage || '/img/登录1.png';
+        document.querySelector('.user-name').textContent = `DR. ${savedUsername},`;
+        document.querySelector('.welcomeBlck').textContent = '欢迎回来';
+
+        // 隐藏注册按钮，显示登出按钮
+        document.querySelector('.registerli').style.display = 'none';
+        document.querySelector('.outBtnLi').style.display = 'block';
+
+        // 更新登录按钮的文本
+        document.getElementById('loginBtn').innerHTML = `<span>切换用户</span> <div class="icon"></div>`;
+      }
+    });
+
+    // 获取 alert 元素
+    const alertCom = document.querySelector('.alert');
+
+    // 抽取提示框的方法
     function showAlert(msg, classname) {
-      alertCom.innerText = msg
-      alertCom.classList.add(classname)
-      alertCom.classList.add('show')
+      alertCom.innerText = msg;
+      alertCom.classList.add(classname);
+      alertCom.classList.add('show');
       alertCom.style.display = 'block'; // 显示提示框
       setTimeout(() => {
         // 延迟隐藏
-        alertCom.classList.remove('show')
-        alertCom.classList.remove(classname)
+        alertCom.classList.remove('show');
+        alertCom.classList.remove(classname);
       }, 2000);
     }
 
-    // 3.给登录按钮绑定点击事件，提交输入的用户信息到服务器
+    // 给登录按钮绑定点击事件，提交输入的用户信息到服务器
     document.querySelector('.btn-login').addEventListener('click', function (event) {
       event.preventDefault(); // 阻止表单提交
 
-      // 3.1 获取输入的用户名和密码
+      // 获取输入的用户名和密码
       const username = document.querySelector('.username').value.trim();
       const password = document.querySelector('.password').value.trim();
 
-      // 3.2用户名 密码 长度判断
+      // 用户名和密码长度判断
       if (username.length < 8) {
-        showAlert('用户名长度需要大于等于8', 'alert-danger')
-        return
+        showAlert('用户名长度需要大于等于8', 'alert-danger');
+        return;
       }
       if (password.length < 6) {
-        showAlert('密码长度需要大于等于6', 'alert-danger')
-        return
+        showAlert('密码长度需要大于等于6', 'alert-danger');
+        return;
       }
 
-      // 3.3 通过axios提交到服务器 并 提示用户 成功 / 失败
+      // 通过 axios 提交到服务器并提示用户成功/失败
       axios({
         url: 'http://hmajax.itheima.net/api/login',
         method: 'post',
@@ -2054,101 +2090,156 @@
         }
       }).then(res => {
         // 显示提示框
-        showAlert(res.data.message, 'alert-success')
-      }).catch(err => {
-        // 显示警示框
-        showAlert(err.response.data.message, 'alert-danger')
-      })
-    })
-  </script>
-  <script>
-    // 1. 获取 alert
-    const alertComRegister = document.querySelector('#registerForm .alert');
-    const switchToLoginLink = document.getElementById('switchToLoginLink');
-    // 2. 抽取提示框的方法
-    function showAlert(msg, classname) {
-      alertComRegister.innerText = msg;
-      alertComRegister.classList.add(classname);
-      alertComRegister.classList.add('show');
-      alertComRegister.style.display = 'block'; // 显示提示框
-      setTimeout(() => {
-        // 延迟隐藏
-        alertComRegister.classList.remove('show');
-        alertComRegister.classList.remove(classname);
-      }, 2000);
-    }
-
-    // 3. 给注册按钮绑定点击事件，提交输入的用户信息到服务器
-    document.querySelector('.btn-register').addEventListener('click', function (event) {
-      event.preventDefault(); // 阻止表单提交
-
-      // 3.1 获取输入的用户名、密码和确认密码
-      const registerUsername = document.querySelector('#registerUsername').value.trim();
-      const registerPassword = document.querySelector('#registerPassword').value.trim();
-      const confirmPassword = document.querySelector('#confirmPassword').value.trim();
-
-      // 3.2 用户名和密码长度判断
-      if (registerUsername.length < 8) {
-        showAlert('用户名长度需要大于等于8', 'alert-danger');
-        return;
-      }
-      if (registerPassword.length < 6) {
-        showAlert('密码长度需要大于等于6', 'alert-danger');
-        return;
-      }
-
-      // 3.3 确认密码与密码是否一致
-      if (registerPassword !== confirmPassword) {
-        showAlert('密码与确认密码不一致', 'alert-danger');
-        return;
-      }
-
-      // 3.4 通过 axios 提交到服务器 并 提示用户成功 / 失败
-      axios({
-        url: 'http://hmajax.itheima.net/api/register',
-        method: 'post',
-        data: {
-          username: registerUsername,
-          password: registerPassword,
-        }
-      }).then(res => {
-        // 显示提示框
         showAlert(res.data.message, 'alert-success');
 
-        // 注册成功后 1 秒钟模拟点击 "立即注册" 链接
+        // 登录成功后，更新界面
         setTimeout(() => {
-          // 手动触发点击事件，模拟点击 #switchToRegisterLink
-          document.getElementById('switchToLoginLink').click();
-        }, 2500); // 1秒后触发点击事件
+          // 修改图片路径
+          document.querySelector('.side-image').src = '/img/登录2.png';
+
+          // 更新用户名称和欢迎文本
+          document.querySelector('.user-name').textContent = `DR. ${username},`;
+          document.querySelector('.welcomeBlck').textContent = '欢迎回来';
+
+          // 更新登录按钮文本
+          document.getElementById('loginBtn').innerHTML = `<span>切换用户</span> <div class="icon"></div>`;
+
+          // 隐藏注册按钮并显示登出按钮
+          document.querySelector('.registerli').style.display = 'none'; // 隐藏 "前往注册"
+          document.querySelector('.outBtnLi').style.display = 'block'; // 显示 "登出"
+
+          // 保存登录后的状态到 localStorage
+          localStorage.setItem('username', username);
+          localStorage.setItem('imageSrc', '/img/登录2.png');
+          localStorage.setItem('isLoggedIn', 'true'); // 标记为已登录
+
+          document.querySelector('.username').value = '';
+          document.querySelector('.password').value = '';
+          // 触发点击事件，模拟关闭当前提示框
+          document.querySelector('.close').click();
+        }, 2000); // 2秒后更新
       }).catch(err => {
         // 显示警示框
         showAlert(err.response.data.message, 'alert-danger');
       });
     });
+
+    // 登出功能
+    document.querySelector('#outBtn').addEventListener('click', function () {
+      // 清除 localStorage 中的登录信息
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+      localStorage.removeItem('imageSrc');
+
+      // 恢复按钮的默认显示状态
+      document.querySelector('.registerli').style.display = 'block';
+      document.querySelector('.outBtnLi').style.display = 'none';
+
+      // 重置页面内容
+      document.querySelector('.side-image').src = '/img/登录1.png';
+      document.querySelector('.user-name').textContent = 'Please login.';
+      document.querySelector('.welcomeBlck').textContent = '请先登录您的账号。';
+
+      // 更新登录按钮的文本
+      document.getElementById('loginBtn').innerHTML = `<span>立即登录</span><div class="icon"></div>`;
+      document.querySelector('.username').value = '';
+      document.querySelector('.password').value = '';
+    });
+
+  </script>
+  <script>
+    (function () {
+      // 1. 获取 alert
+      const alertComRegister = document.querySelector('#registerForm .alert');
+      const switchToLoginLink = document.getElementById('switchToLoginLink');
+      // 2. 抽取提示框的方法
+      function showAlert(msg, classname) {
+        alertComRegister.innerText = msg;
+        alertComRegister.classList.add(classname);
+        alertComRegister.classList.add('show');
+        alertComRegister.style.display = 'block'; // 显示提示框
+        setTimeout(() => {
+          // 延迟隐藏
+          alertComRegister.classList.remove('show');
+          alertComRegister.classList.remove(classname);
+        }, 2000);
+      }
+
+      // 3. 给注册按钮绑定点击事件，提交输入的用户信息到服务器
+      document.querySelector('.btn-register').addEventListener('click', function (event) {
+        event.preventDefault(); // 阻止表单提交
+
+        // 3.1 获取输入的用户名、密码和确认密码
+        const registerUsername = document.querySelector('#registerUsername').value.trim();
+        const registerPassword = document.querySelector('#registerPassword').value.trim();
+        const confirmPassword = document.querySelector('#confirmPassword').value.trim();
+
+        // 3.2 用户名和密码长度判断
+        if (registerUsername.length < 8) {
+          showAlert('用户名长度需要大于等于8', 'alert-danger');
+          return;
+        }
+        if (registerPassword.length < 6) {
+          showAlert('密码长度需要大于等于6', 'alert-danger');
+          return;
+        }
+
+        // 3.3 确认密码与密码是否一致
+        if (registerPassword !== confirmPassword) {
+          showAlert('密码与确认密码不一致', 'alert-danger');
+          return;
+        }
+
+        // 3.4 通过 axios 提交到服务器 并 提示用户成功 / 失败
+        axios({
+          url: 'http://hmajax.itheima.net/api/register',
+          method: 'post',
+          data: {
+            username: registerUsername,
+            password: registerPassword,
+          }
+        }).then(res => {
+          // 显示提示框
+          showAlert(res.data.message, 'alert-success');
+
+          // 注册成功后 1 秒钟模拟点击 "立即注册" 链接
+          setTimeout(() => {
+            document.querySelector('#registerUsername').value = '';
+            document.querySelector('#registerPassword').value = '';
+            document.querySelector('#confirmPassword').value = '';
+            // 手动触发点击事件，模拟点击 #switchToRegisterLink
+            document.getElementById('switchToLoginLink').click();
+          }, 2000); // 1秒后触发点击事件
+        }).catch(err => {
+          // 显示警示框
+          showAlert(err.response.data.message, 'alert-danger');
+        });
+      });
+    })()
   </script>
 
 
 
   <script>
 
-    (function () {
-      // 处理 .word 中的点击事件
-      document.querySelector('.nav .word').addEventListener('click', function (e) {
-        // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
-        const nav = e.target.closest('a');
-        // 如果点击的是 a 标签（或其子元素），就执行下面的逻辑
-        if (nav) {
-          const old = document.querySelector('.nav1 .active');
+      (function () {
+        // 处理 .word 中的点击事件
+        document.querySelector('.nav .word').addEventListener('click', function (e) {
+          // 判断点击的是不是 a 标签，或者是 a 标签内的子元素（例如 div）
+          const nav = e.target.closest('a');
+          // 如果点击的是 a 标签（或其子元素），就执行下面的逻辑
+          if (nav) {
+            const old = document.querySelector('.nav1 .active');
 
-          // 如果有 active 类的元素，移除该类
-          if (old) {
-            old.classList.remove('active');
+            // 如果有 active 类的元素，移除该类
+            if (old) {
+              old.classList.remove('active');
+            }
+            // 为当前点击的 a 标签添加 active 类
+            nav.classList.add('active');
           }
-          // 为当前点击的 a 标签添加 active 类
-          nav.classList.add('active');
-        }
-      });
-    })();
+        });
+      })();
 
     (function () {
       // 处理 .wl 中的点击事件
@@ -2232,7 +2323,13 @@
         modalTitle.textContent = '';
         // 切换提示文字
         switchText.innerHTML = ' <span id="switchToRegisterLink" style="color: gray; cursor: pointer;">还没有账户? 立即注册</span>';
+        document.getElementById('switchToRegisterLink').addEventListener('mouseover', function () {
+          this.style.color = 'black'; // 鼠标经过时变黑
+        });
 
+        document.getElementById('switchToRegisterLink').addEventListener('mouseout', function () {
+          this.style.color = 'gray'; // 鼠标移开时恢复原来的灰色
+        });
         // 绑定点击事件
         const switchToRegisterLink = document.getElementById('switchToRegisterLink');
         switchToRegisterLink.removeEventListener('click', showRegisterForm);  // 移除可能存在的事件
@@ -2246,7 +2343,13 @@
         modalTitle.textContent = '';
         // 切换提示文字
         switchText.innerHTML = '<span id="switchToLoginLink" style="color: gray; cursor: pointer;">已经有账户?  立即登录</span>';
+        document.getElementById('switchToLoginLink').addEventListener('mouseover', function () {
+          this.style.color = 'black'; // 鼠标经过时变黑
+        });
 
+        document.getElementById('switchToLoginLink').addEventListener('mouseout', function () {
+          this.style.color = 'gray'; // 鼠标移开时恢复原来的灰色
+        });
         // 绑定点击事件
         const switchToLoginLink = document.getElementById('switchToLoginLink');
         switchToLoginLink.addEventListener('click', showLoginForm);  // 重新绑定事件
